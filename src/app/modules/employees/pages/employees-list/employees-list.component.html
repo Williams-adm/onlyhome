@@ -1,0 +1,15 @@
+<h1>My Employees</h1>
+<div *ngFor="let employee of employeesList">
+    <p>{{ employee.full_name }}</p>
+    <!-- Aquí puedes mostrar otros detalles del empleado -->
+</div>
+
+<div *ngIf="links">
+    <a *ngIf="links.prev" [routerLink]="links.prev">Anterior</a>
+    <a *ngIf="links.next" [routerLink]="links.next">Siguiente</a>
+</div>
+
+<div *ngIf="meta">
+    <p>Página {{ meta.current_page }} de {{ meta.last_page }}</p>
+    <p>Total de empleados: {{ meta.total }}</p>
+</div>
