@@ -5,7 +5,7 @@ import { EmployeeService } from '../../../../shared/services/employee.service';
 @Component({
   selector: 'app-employees-list',
   templateUrl: './employees-list.component.html',
-  styleUrl: './employees-list.component.css'
+  styleUrl: './employees-list.component.css',
 })
 export class EmployeesListComponent implements OnInit{
   employeesList: Datum[] = [];

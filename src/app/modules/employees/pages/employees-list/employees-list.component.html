@@ -13,3 +13,29 @@
     <p>Página {{ meta.current_page }} de {{ meta.last_page }}</p>
     <p>Total de empleados: {{ meta.total }}</p>
 </div>
+
+<div class="card">
+    <p-table [value]="employeesList" [paginator]="true" [rows]="15" [tableStyle]="{ 'min-width': '50rem' }"
+        [rowsPerPageOptions]="[15, 30, 45]">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:15%">Foto</th>
+                <th style="width:25%">Nombres</th>
+                <th style="width:10%">Registro</th>
+                <th style="width:20%">Correo</th>
+                <th style="width:25%">Opciones</th>
+                <th style="width:15%">Estado</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-employee>
+            <tr>
+                <td>{{ employee.photo }}</td>
+                <td>{{ employee.full_name }}</td>
+                <td>{{ employee.registration_date }}</td>
+                <td>{{ employee.user.email }}</td>
+                <td>options</td>
+                <td>{{ employee.user.status }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
