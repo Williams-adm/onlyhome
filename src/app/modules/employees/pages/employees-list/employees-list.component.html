@@ -1,25 +1,12 @@
 <h1>My Employees</h1>
-<div *ngFor="let employee of employeesList">
-    <p>{{ employee.full_name }}</p>
-    <!-- Aquí puedes mostrar otros detalles del empleado -->
-</div>
-
-<div *ngIf="links">
-    <a *ngIf="links.prev" [routerLink]="links.prev">Anterior</a>
-    <a *ngIf="links.next" [routerLink]="links.next">Siguiente</a>
-</div>
-
-<div *ngIf="meta">
-    <p>Página {{ meta.current_page }} de {{ meta.last_page }}</p>
-    <p>Total de empleados: {{ meta.total }}</p>
-</div>
 
 <div class="card">
-    <p-table [value]="employeesList" [paginator]="true" [rows]="15" [tableStyle]="{ 'min-width': '50rem' }"
-        [rowsPerPageOptions]="[15, 30, 45]">
+    <p-table [value]="employeesList" [paginator]="true" [rows]="15" [totalRecords]="totalRecords" [lazy]="true" [tableStyle]="{ 'min-width': '50rem' }"
+        (onLazyLoad)="loadEmployees($event)" [rowsPerPageOptions]="[15, 30, 45]">
         <ng-template pTemplate="header">
             <tr>
-                <th style="width:15%">Foto</th>
+                <th style="width:5%">#</th>
+                <th style="width:10%">Foto</th>
                 <th style="width:25%">Nombres</th>
                 <th style="width:10%">Registro</th>
                 <th style="width:20%">Correo</th>
@@ -27,9 +14,10 @@
                 <th style="width:15%">Estado</th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-employee>
-            <tr>
-                <td>{{ employee.photo }}</td>
+        <ng-template pTemplate="body" let-employee let-i="rowIndex">
+            <tr class="prueba">
+                <td>{{ i + 1 }}</td>
+                <td><img [src]="env.backendBaseUrl + employee.photo" alt=""></td>
                 <td>{{ employee.full_name }}</td>
                 <td>{{ employee.registration_date }}</td>
                 <td>{{ employee.user.email }}</td>
