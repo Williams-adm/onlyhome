@@ -4,6 +4,8 @@ import { EmployeesListComponent } from './pages/employees-list/employees-list.co
 import { EmployeesRoutingModule } from './employees-routing.module';
 import { HttpClientJsonpModule } from '@angular/common/http';
 import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,9 @@ import { TableModule } from 'primeng/table';
     CommonModule,
     EmployeesRoutingModule,
     HttpClientJsonpModule,
-    TableModule
+    TableModule,
+    ButtonModule,
+    DialogModule
   ]
 })
 export class EmployeesModule { }

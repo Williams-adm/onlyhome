@@ -1,3 +1,8 @@
 img {
+    width: 6rem;
+}
+.iconos{
     width: 10rem;
+    display: flex;
+    justify-content: space-between;
 }

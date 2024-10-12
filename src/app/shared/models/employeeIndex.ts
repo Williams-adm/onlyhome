@@ -1,4 +1,4 @@
-export interface gEmployees {
+export interface indexEmployees {
     data:  Datum[];
     links: Links;
     meta:  Meta;
