@@ -6,10 +6,14 @@ import { HttpClientJsonpModule } from '@angular/common/http';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
+import { CreateEmployeeComponent } from './pages/create-employee/create-employee.component';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    EmployeesListComponent
+    EmployeesListComponent,
+    CreateEmployeeComponent
   ],
   imports: [
     CommonModule,
@@ -17,7 +21,9 @@ import { DialogModule } from 'primeng/dialog';
     HttpClientJsonpModule,
     TableModule,
     ButtonModule,
-    DialogModule
+    DialogModule,
+    ToggleButtonModule,
+    FormsModule
   ]
 })
 export class EmployeesModule { }

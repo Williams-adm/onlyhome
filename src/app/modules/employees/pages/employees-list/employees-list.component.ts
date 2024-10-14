@@ -3,10 +3,12 @@ import { environment } from '../../../../../environments/environment.development
 import { Datum, indexEmployees, Meta } from '../../../../shared/models/employeeIndex';
 import { EmployeeService } from '../../../../shared/services/employee.service';
 import { Data, showEmployee } from '../../../../shared/models/employeeShow';
+
 @Component({
   selector: 'app-employees-list',
   templateUrl: './employees-list.component.html',
   styleUrl: './employees-list.component.css',
+  
 })
   
 export class EmployeesListComponent implements OnInit {
@@ -14,10 +16,10 @@ export class EmployeesListComponent implements OnInit {
   meta: Meta | undefined;
   env = environment;
   totalRecords: number = 0;
-  loading: boolean = true;
+  loading: boolean = false;
   visible: boolean = false;
   selectedEmployee: Data | null = null;
-  
+
   constructor(private employeeService: EmployeeService) {}
 
   ngOnInit(): void {
@@ -25,6 +27,8 @@ export class EmployeesListComponent implements OnInit {
   }
 
   loadEmployees(event: any) {
+    if (this.loading) return;
+
     this.loading = true;
 
     const page = event.first / event.rows + 1;
@@ -36,7 +40,12 @@ export class EmployeesListComponent implements OnInit {
         this.employeesList = data.data;
         this.totalRecords = data.meta.total;
         this.loading = false;
-      });
+      },
+      error => {
+        console.error("Error al cargar a los empleados", error)
+        this.loading = false;
+        }
+      );
   }
 
   showDialog(id : number) {
@@ -45,4 +54,5 @@ export class EmployeesListComponent implements OnInit {
       this.selectedEmployee = data.data;
     })
   }
+
 }

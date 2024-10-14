@@ -1,8 +1,19 @@
 img {
     width: 6rem;
 }
+.profile{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
 .iconos{
     width: 10rem;
     display: flex;
     justify-content: space-between;
+}
+.a{
+    background-color: #f0f0f0;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
 }

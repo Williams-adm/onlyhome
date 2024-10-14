@@ -18,7 +18,9 @@ export interface Data {
 }
 
 export interface Address {
-    id:               number;
+    id: number;
+    country: string;
+    region: string;
     province:         string;
     city:             string;
     street:           string;
