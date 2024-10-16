@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
-import { indexEmployees } from '../models/employeeIndex';
+import { indexEmployees, User } from '../models/employeeIndex';
 import { showEmployee } from '../models/employeeShow';
 import { storeEmployee } from '../models/employeeStore';
 
@@ -36,9 +36,9 @@ export class EmployeeService {
     )
   }
 
-  public patchEmployees(id: Number): Observable<>{
-    return this.http.patch<>(
-      `${environment.backendBaseUrl}/api/v1/employees/${id}`
+  public patchEmployees(id: Number, employeeData: Partial<storeEmployee>): Observable<{ message: string }>{
+    return this.http.patch<{ message: string }>(
+      `${environment.backendBaseUrl}/api/v1/employees/${id}`, employeeData
     )
   }
 

@@ -30,7 +30,8 @@
                         <a href=""><i class="pi pi-file-edit" style="font-size: 20px"></i></a>
                     </div>
                 </td>
-                <td><p-toggleButton onLabel="Activo" offLabel="Inactivo" [onIcon]="'pi pi-check'" [offIcon]="'pi pi-times'" [ngModel]="employee.user.status === 1" />{{employee.user.status}}</td>
+                <td><p-toggleButton onLabel="Activo" offLabel="Inactivo" [onIcon]="'pi pi-check'" [offIcon]="'pi pi-times'" [ngModel]="employee.user.status === 1" 
+                (onChange)="onToggleChange(employee.id, employee.user.status)"/></td>
             </tr>
         </ng-template>
     </p-table>

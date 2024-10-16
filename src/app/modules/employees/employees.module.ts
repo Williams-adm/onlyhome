@@ -8,7 +8,10 @@ import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { CreateEmployeeComponent } from './pages/create-employee/create-employee.component';
 import { ToggleButtonModule } from 'primeng/togglebutton';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CalendarModule } from 'primeng/calendar';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,11 @@ import { FormsModule } from '@angular/forms';
     ButtonModule,
     DialogModule,
     ToggleButtonModule,
-    FormsModule
+    FormsModule, 
+    ReactiveFormsModule,
+    CalendarModule,
+    InputNumberModule,
+    DropdownModule
   ]
 })
 export class EmployeesModule { }

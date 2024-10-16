@@ -55,4 +55,21 @@ export class EmployeesListComponent implements OnInit {
     })
   }
 
+  onToggleChange(employeeId: number, currentStatus: number): void {
+  const newStatus = currentStatus === 1 ? 0 : 1;
+  this.employeeService.patchEmployees(employeeId, { user: { status: newStatus } })
+    .subscribe(
+      response => {
+        /* console.log(response.message); */ // Muestra el mensaje de éxito en la consola
+        const employee = this.employeesList.find(emp => emp.id === employeeId);
+        if (employee) {
+          employee.user.status = newStatus; // Actualiza el estado localmente
+        }
+      },
+      error => {
+        console.error('Error al actualizar el estado del empleado', error);
+      }
+    );
+}
+
 }

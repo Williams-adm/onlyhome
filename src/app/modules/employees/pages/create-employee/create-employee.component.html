@@ -1,1 +1,42 @@
-<p>create-employee works!</p>
+<h1>REGISTRAR EMPLEADO</h1>
+<form [formGroup]="formEmployee">
+    <div>
+        <label for="name">Nombres: </label>
+        <input type="text" id="name" name="name" pInputText formControlName="name" autocomplete="given-name"/>
+    </div>
+    <div>
+        <label for="paternalSurname">Apellido Paterno: </label>
+        <input type="text" id="paternalSurname" name="paternal_surname" pInputText formControlName="paternal_surname" />
+    </div>
+    <div>
+        <label for="maternalSurname">Apellido Materno: </label>
+        <input type="text" id="maternalSurname" name="maternal_surname" pInputText formControlName="maternal_surname" />
+    </div>
+    <div>
+        <label for="dateOfBirth">Fecha De Nacimiento: </label>
+        <p-calendar inputId="dateOfBirth" name="date_of_birth" formControlName="date" />
+    </div>
+    <div>
+        <label for="salary">Salario: </label>
+        <p-inputNumber inputId="salary" name="salary" mode="currency" currency="PEN" locale="es-PE" formControlName="salary"/>
+    </div>
+    <div>
+        <p>Fecha De Pago: <p-dropdown inputId="paymentDate" name="payment_date" formControlName="payment_date" [options]="paymentDates" optionLabel="label" placeholder="Seleccione" /></p>
+    </div>
+    <div>
+        <p>Tipo De Documento: <p-dropdown name="payment_date" formControlName="document_type" [options]="docTypes" optionLabel="label" placeholder="Seleccione" /></p>
+    </div>
+    <div>
+        <label for="numberDoc">N° Doc: </label>
+        <input id="numberDoc" name="number" type="number" formControlName="number">
+    </div>
+    <div>
+        <label for="prefix">Prefijo: </label>
+        <input type="text" id="prefix" name="prefix" pInputText formControlName="prefix" />
+    </div>
+    <div>
+        <label for="numberPhone">N° Telefono: </label>
+        <input id="numberPhone" name="number" type="number" formControlName="number_phone">
+    </div>
+    
+</form>

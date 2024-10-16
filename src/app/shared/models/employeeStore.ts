@@ -1,10 +1,10 @@
-enum paymentDate{
+export enum paymentDate{
     fin_de_mes = "Fin de mes",
     Quincenal = "Quincenal",
     Semanal = "Semanal",
 }
 
-enum docType{
+export enum docType{
     Dni = "DNI",
     Pasaporte = "Pasaporte",
     CarnetExtrangeria = "CARNET_EXT",
@@ -19,43 +19,43 @@ enum employDoc{
 }
 
 export interface storeEmployee {
-    name:               string;
-    paternal_surname:   string;
-    maternal_surname:   string;
-    date_of_birth:      Date;
-    salary:             number;
-    payment_date:       paymentDate;
-    document_types:     DocumentType[];
-    phones:             Phone[];
-    addresses:          Address[];
-    user:               User;
-    employee_documents: EmployeeDocument[];
+    name?:               string;
+    paternal_surname?:   string;
+    maternal_surname?:   string;
+    date_of_birth?:      Date;
+    salary?:             number;
+    payment_date?:       paymentDate;
+    document_types?:     DocumentType[];
+    phones?:             Phone[];
+    addresses?:          Address[];
+    user?:               User;
+    employee_documents?: EmployeeDocument[];
 }
 
 export interface Address {
-    province: string;
-    city:     string;
-    street:   string;
-    number:   string;
+    province?: string;
+    city?:     string;
+    street?:   string;
+    number?:   string;
 }
 
 export interface DocumentType {
-    type:   docType;
-    number: number;
+    type?:   docType;
+    number?: number;
 }
 
 export interface EmployeeDocument {
-    document_type: employDoc;
-    document_path: string;
+    document_type?: employDoc;
+    document_path?: string;
 }
 
 export interface Phone {
-    prefix: string;
-    number: number;
+    prefix?: string;
+    number?: number;
 }
 
 export interface User {
-    email:    string;
-    password: string;
-    status?: boolean
+    email?:    string;
+    password?: string;
+    status?: number
 }
