@@ -1,29 +1,34 @@
 <h1>REGISTRAR EMPLEADO</h1>
-<form [formGroup]="formEmployee">
-    <div>
-        <label for="name">Nombres: </label>
-        <input type="text" id="name" name="name" pInputText formControlName="name" autocomplete="given-name"/>
-    </div>
-    <div>
-        <label for="paternalSurname">Apellido Paterno: </label>
-        <input type="text" id="paternalSurname" name="paternal_surname" pInputText formControlName="paternal_surname" />
-    </div>
-    <div>
-        <label for="maternalSurname">Apellido Materno: </label>
-        <input type="text" id="maternalSurname" name="maternal_surname" pInputText formControlName="maternal_surname" />
-    </div>
-    <div>
-        <label for="dateOfBirth">Fecha De Nacimiento: </label>
-        <p-calendar inputId="dateOfBirth" name="date_of_birth" formControlName="date" />
-    </div>
-    <div>
-        <label for="salary">Salario: </label>
-        <p-inputNumber inputId="salary" name="salary" mode="currency" currency="PEN" locale="es-PE" formControlName="salary"/>
-    </div>
-    <div>
-        <p>Fecha De Pago: <p-dropdown inputId="paymentDate" name="payment_date" formControlName="payment_date" [options]="paymentDates" optionLabel="label" placeholder="Seleccione" /></p>
-    </div>
-    <div>
+<form [formGroup]="formEmployee" (ngSubmit)="onSubmit()">
+    <section>
+        <div>
+            <label for="name">Nombres: </label>
+            <input type="text" id="name" name="name" formControlName="name" pInputText autocomplete="given-name"/>
+        </div>
+        <div>
+            <label for="paternalSurname">Apellido Paterno: </label>
+            <input type="text" id="paternalSurname" name="paternal_surname" formControlName="paternal_surname" pInputText/>
+        </div>
+        <div>
+            <label for="maternalSurname">Apellido Materno: </label>
+            <input type="text" id="maternalSurname" name="maternal_surname" formControlName="maternal_surname" pInputText/>
+        </div>
+        <div>
+            <label for="dateOfBirth">Fecha De Nacimiento: </label>
+            <p-calendar inputId="dateOfBirth" name="date_of_birth" formControlName="date_of_birth" [dateFormat]="'dd-mm-yy'"/>
+        </div>
+        <div>
+            <label for="salary">Salario: </label>
+            <p-inputNumber inputId="salary" name="salary" formControlName="salary" mode="currency" currency="PEN" locale="es-PE" />
+        </div>
+        <div>
+            <p>Fecha De Pago: <p-dropdown inputId="paymentDate" name="payment_date" formControlName="payment_date" 
+                [options]="paymentDates" optionLabel="label" placeholder="Seleccione" /></p>
+        </div>
+    </section>
+
+
+<!--     <div>
         <p>Tipo De Documento: <p-dropdown name="payment_date" formControlName="document_type" [options]="docTypes" optionLabel="label" placeholder="Seleccione" /></p>
     </div>
     <div>
@@ -37,6 +42,6 @@
     <div>
         <label for="numberPhone">N° Telefono: </label>
         <input id="numberPhone" name="number" type="number" formControlName="number_phone">
-    </div>
-    
+    </div>-->
+    <p-button label="Registrar" type="submit"></p-button>
 </form>

@@ -1,30 +1,10 @@
-export enum paymentDate{
-    fin_de_mes = "Fin de mes",
-    Quincenal = "Quincenal",
-    Semanal = "Semanal",
-}
-
-export enum docType{
-    Dni = "DNI",
-    Pasaporte = "Pasaporte",
-    CarnetExtrangeria = "CARNET_EXT",
-    Ruc = "RUC",
-    Otros = "Otros"
-}
-
-enum employDoc{
-    Cv = "Cv",
-    CopiaDeDi = "Copia de di",
-    Otros = "Otros",
-}
-
 export interface storeEmployee {
     name?:               string;
     paternal_surname?:   string;
     maternal_surname?:   string;
     date_of_birth?:      Date;
     salary?:             number;
-    payment_date?:       paymentDate;
+    payment_date?:       PaymentDate;
     document_types?:     DocumentType[];
     phones?:             Phone[];
     addresses?:          Address[];
@@ -59,3 +39,26 @@ export interface User {
     password?: string;
     status?: number
 }
+
+
+export enum PaymentDate{
+    fin_de_mes = "Fin de mes",
+    Quincenal = "Quincenal",
+    Semanal = "Semanal",
+}
+
+export enum docType{
+    Dni = "DNI",
+    Pasaporte = "Pasaporte",
+    CarnetExtrangeria = "CARNET_EXT",
+    Ruc = "RUC",
+    Otros = "Otros"
+}
+
+
+enum employDoc{
+    Cv = "Cv",
+    CopiaDeDi = "Copia de di",
+    Otros = "Otros",
+}
+
