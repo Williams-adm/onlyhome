@@ -3,7 +3,7 @@ export interface EmployeeDocument {
     document_path?: string;
 }
 
-enum employDoc{
+export enum employDoc{
     Cv = "Cv",
     CopiaDeDi = "Copia de di",
     Otros = "Otros",

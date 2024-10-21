@@ -12,6 +12,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CalendarModule } from 'primeng/calendar';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DropdownModule } from 'primeng/dropdown';
+import { PasswordModule } from 'primeng/password';
+import { FileUploadModule } from 'primeng/fileupload';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { DropdownModule } from 'primeng/dropdown';
     ReactiveFormsModule,
     CalendarModule,
     InputNumberModule,
-    DropdownModule
+    DropdownModule,
+    PasswordModule,
+    FileUploadModule,
   ]
 })
 export class EmployeesModule { }

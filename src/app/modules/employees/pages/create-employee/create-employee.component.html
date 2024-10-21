@@ -25,6 +25,11 @@
             <p>Fecha De Pago: <p-dropdown name="payment_date" formControlName="payment_date" 
                 [options]="paymentDates" optionLabel="label" placeholder="Seleccione" /></p>
         </div>
+        
+        <div>
+            <p>Foto: <p-fileUpload chooseLabel="Subir" chooseIcon="pi pi-upload" name="photo_path'" accept="image/*"
+                maxFileSize="1000000" (onSelect)="onImageSelect($event)" (onRemove)="onImageRemove($event)" [showUploadButton]="false" [showCancelButton]="false" /></p>   
+        </div>
     </section>
 
     <section>
@@ -70,10 +75,33 @@
             <label for="street">Calle: </label>
             <input type="text" id="street" name="street" formControlName="street" pInputText/>
         </div>
-        <div class="input-group">
+        <div>
             <label for="numberStreet">N° De Calle: </label>
-
             <p-inputNumber inputId="numberStreet"  name="number" formControlName="number_street" format="false" class="number-input"/>
+        </div>
+    </section>
+
+    <section>
+        <div>
+            <label for="email">Email: </label>
+            <input type="email" id="email" name="email" formControlName="email" autocomplete="given-name">
+        </div>
+        <div>
+            <label for="password">Password: </label>
+            <p-password inputId="password" formControlName="password" [toggleMask]="true" promptLabel="Digite su contraseña" weakLabel="Muy simple" 
+                mediumLabel="Suficiente" strongLabel="Excepcional" />
+        </div>
+    </section>
+
+    <section>
+        <div>
+            <p>Documentos Externos: <p-dropdown name="document_type_employ" formControlName="document_type_employ" [options]="documentTypesEmployees" optionLabel="label"
+                placeholder="Seleccione" /></p>
+        </div>
+        <div>
+            <p>Archivo: <p-fileUpload chooseLabel="Subir" chooseIcon="pi pi-upload" name="document_path'" accept=".pdf"
+                maxFileSize="2000000" (onSelect)="onFileSelect($event)" (onRemove)="onFileRemove($event)"
+                [showUploadButton]="false" [showCancelButton]="false" /></p>
         </div>
     </section>
 
