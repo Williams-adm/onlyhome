@@ -1,3 +1,9 @@
+import { Address } from "./adress";
+import { DocumentType } from "./documentType";
+import { EmployeeDocument } from "./employeeDocument";
+import { Phone } from "./phone";
+import { User } from "./user";
+
 export interface storeEmployee {
     name?:               string;
     paternal_surname?:   string;
@@ -7,58 +13,18 @@ export interface storeEmployee {
     payment_date?:       PaymentDate;
     document_types?:     DocumentType[];
     phones?:             Phone[];
-    addresses?:          Address[];
-    user?:               User;
+    addresses?:          Address [];
+    user?:               UserData;
     employee_documents?: EmployeeDocument[];
 }
 
-export interface Address {
-    province?: string;
-    city?:     string;
-    street?:   string;
-    number?:   string;
-}
-
-export interface DocumentType {
-    type?:   docType;
-    number?: number;
-}
-
-export interface EmployeeDocument {
-    document_type?: employDoc;
-    document_path?: string;
-}
-
-export interface Phone {
-    prefix?: string;
-    number?: number;
-}
-
-export interface User {
-    email?:    string;
-    password?: string;
-    status?: number
-}
-
-
 export enum PaymentDate{
-    fin_de_mes = "Fin de mes",
-    Quincenal = "Quincenal",
-    Semanal = "Semanal",
+    'Fin De Mes' = "fin_de_mes",
+    'Quincenal' = "Quincenal",
+    'Semanal' = "Semanal",
 }
 
-export enum docType{
-    Dni = "DNI",
-    Pasaporte = "Pasaporte",
-    CarnetExtrangeria = "CARNET_EXT",
-    Ruc = "RUC",
-    Otros = "Otros"
+export interface UserData extends User {
+    status?: number;
+    password?: string;
 }
-
-
-enum employDoc{
-    Cv = "Cv",
-    CopiaDeDi = "Copia de di",
-    Otros = "Otros",
-}
-

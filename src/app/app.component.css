@@ -1,0 +1,16 @@
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+.input-addon {
+    margin-right: 5px;
+    /* Espacio entre el símbolo y el input */
+    font-weight: bold;
+    /* Estilo del símbolo */
+}
+
+.number-input {
+    width: 80px;
+    /* Ajusta el ancho según sea necesario */
+}

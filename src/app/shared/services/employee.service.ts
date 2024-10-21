@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment.development';
-import { indexEmployees, User } from '../models/employeeIndex';
+import { indexEmployees } from '../models/employeeIndex';
 import { showEmployee } from '../models/employeeShow';
 import { storeEmployee } from '../models/employeeStore';
 

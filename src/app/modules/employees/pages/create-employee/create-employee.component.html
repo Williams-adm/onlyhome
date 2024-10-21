@@ -22,26 +22,60 @@
             <p-inputNumber inputId="salary" name="salary" formControlName="salary" mode="currency" currency="PEN" locale="es-PE" />
         </div>
         <div>
-            <p>Fecha De Pago: <p-dropdown inputId="paymentDate" name="payment_date" formControlName="payment_date" 
+            <p>Fecha De Pago: <p-dropdown name="payment_date" formControlName="payment_date" 
                 [options]="paymentDates" optionLabel="label" placeholder="Seleccione" /></p>
         </div>
     </section>
 
+    <section>
+        <div>
+            <p>Tipo De Documento: <p-dropdown name="document_types" formControlName="type" 
+                [options]="documentTypes" optionLabel="label" placeholder="Seleccione" /></p>
+        </div>
+        <div>
+            <label for="numberDoc">N° Doc: </label>
+            <p-inputNumber inputId="numberDoc" name="number" formControlName="document_number" format="false" />
+        </div>
+    </section>
 
-<!--     <div>
-        <p>Tipo De Documento: <p-dropdown name="payment_date" formControlName="document_type" [options]="docTypes" optionLabel="label" placeholder="Seleccione" /></p>
-    </div>
-    <div>
-        <label for="numberDoc">N° Doc: </label>
-        <input id="numberDoc" name="number" type="number" formControlName="number">
-    </div>
-    <div>
-        <label for="prefix">Prefijo: </label>
-        <input type="text" id="prefix" name="prefix" pInputText formControlName="prefix" />
-    </div>
-    <div>
-        <label for="numberPhone">N° Telefono: </label>
-        <input id="numberPhone" name="number" type="number" formControlName="number_phone">
-    </div>-->
+    <section>
+        <div>
+            <p>Prefijo: <p-dropdown name="prefix" formControlName="prefix" 
+                [options]="prefixs" optionLabel="label" placeholder="Seleccione" /></p>
+        </div>
+        <div>
+            <label for="numberPhone">N° Telefonico: </label>
+            <p-inputNumber inputId="numberPhone" name="number" formControlName="phone_number" format="false" />
+        </div>
+    </section>
+
+    <section>
+        <div>
+            <p>Pais: <p-dropdown name="country" formControlName="country" [options]="countries" optionLabel="label"
+                placeholder="Seleccione" /></p>
+        </div>
+        <div>
+            <p>Departamento: <p-dropdown name="region" formControlName="region" [options]="regions" optionLabel="label"
+                placeholder="Seleccione" /></p>
+        </div>
+        <div>
+            <p>Provincia: <p-dropdown name="province" formControlName="province" [options]="provinces" optionLabel="label"
+                placeholder="Seleccione" (onChange)="onProvinceChange()"/></p>
+        </div>
+        <div>
+            <p>Ciudad: <p-dropdown name="city" formControlName="city" [options]="cities" optionLabel="label"
+                placeholder="Seleccione" /></p>
+        </div>
+        <div>
+            <label for="street">Calle: </label>
+            <input type="text" id="street" name="street" formControlName="street" pInputText/>
+        </div>
+        <div class="input-group">
+            <label for="numberStreet">N° De Calle: </label>
+
+            <p-inputNumber inputId="numberStreet"  name="number" formControlName="number_street" format="false" class="number-input"/>
+        </div>
+    </section>
+
     <p-button label="Registrar" type="submit"></p-button>
 </form>

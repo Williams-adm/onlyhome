@@ -1,3 +1,9 @@
+import { Address } from "./adress";
+import { DocumentType } from "./documentType";
+import { EmployeeDocument } from "./employeeDocument";
+import { Phone } from "./phone";
+import { User } from "./user";
+
 export interface showEmployee {
     data: Data;
 }
@@ -11,43 +17,19 @@ export interface Data {
     payment_date:   string;
     photo_path:     string;
     document_types: DocumentType[];
-    phones:         Phone[];
-    address:        Address[];
-    user:           User;
-    documents:      Document[];
+    phones:         PhoneWithId[];
+    address:        AddressWithId[];
+    user:           UserData;
+    documents:      EmployeeDocument[];
 }
-
-export interface Address {
+export interface AddressWithId extends Address {
     id: number;
-    country: string;
-    region: string;
-    province:         string;
-    city:             string;
-    street:           string;
-    addressable_id:   number;
-    addressable_type: string;
 }
 
-export interface DocumentType {
-    id:     number;
-    type:   string;
-    number: string;
+export interface PhoneWithId extends Phone {
+    id: number;
 }
 
-export interface Document {
-    id:            number;
-    document_type: string;
-    document_path: string;
-}
-
-export interface Phone {
-    id:             number;
-    number:         string;
-    phoneable_id:   number;
-    phoneable_type: string;
-}
-
-export interface User {
-    id:    number;
-    email: string;
+export interface UserData extends User {
+    id: number;
 }

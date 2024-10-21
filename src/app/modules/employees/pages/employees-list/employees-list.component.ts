@@ -60,10 +60,9 @@ export class EmployeesListComponent implements OnInit {
   this.employeeService.patchEmployees(employeeId, { user: { status: newStatus } })
     .subscribe(
       response => {
-        /* console.log(response.message); */ // Muestra el mensaje de éxito en la consola
         const employee = this.employeesList.find(emp => emp.id === employeeId);
         if (employee) {
-          employee.user.status = newStatus; // Actualiza el estado localmente
+          employee.user.status = newStatus;
         }
       },
       error => {

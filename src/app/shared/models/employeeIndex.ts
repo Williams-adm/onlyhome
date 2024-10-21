@@ -1,3 +1,5 @@
+import { User } from "./user";
+
 export interface indexEmployees {
     data:  Datum[];
     links: Links;
@@ -7,14 +9,13 @@ export interface indexEmployees {
 export interface Datum {
     id:                number;
     full_name:         string;
-    user:              User;
+    user:              UserData;
     photo:             string;
     registration_date: string;
 }
 
-export interface User {
-    id:     number;
-    email:  string;
+export interface UserData extends User {
+    id: number;
     status: number;
 }
 
