@@ -27,7 +27,7 @@
         </div>
         
         <div>
-            <p>Foto: <p-fileUpload chooseLabel="Subir" chooseIcon="pi pi-upload" name="photo_path'" accept="image/*"
+            <p>Foto: <p-fileUpload chooseLabel="Subir" chooseIcon="pi pi-upload" name="photo_path" accept="image/*"
                 maxFileSize="1000000" (onSelect)="onImageSelect($event)" (onRemove)="onImageRemove($event)" [showUploadButton]="false" [showCancelButton]="false" /></p>   
         </div>
     </section>
@@ -99,7 +99,7 @@
                 placeholder="Seleccione" /></p>
         </div>
         <div>
-            <p>Archivo: <p-fileUpload chooseLabel="Subir" chooseIcon="pi pi-upload" name="document_path'" accept=".pdf"
+            <p>Archivo: <p-fileUpload chooseLabel="Subir" chooseIcon="pi pi-upload" name="document_path" accept=".pdf"
                 maxFileSize="2000000" (onSelect)="onFileSelect($event)" (onRemove)="onFileRemove($event)"
                 [showUploadButton]="false" [showCancelButton]="false" /></p>
         </div>

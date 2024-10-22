@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { PaymentDate } from '../../../../shared/models/employeeStore';
+import { PaymentDate, storeEmployee } from '../../../../shared/models/employeeStore';
 import { docType } from '../../../../shared/models/documentType';
 import { prefix } from '../../../../shared/models/phone';
 import { city, country, province, region } from '../../../../shared/models/adress';
 import { employDoc } from '../../../../shared/models/employeeDocument';
+import { EmployeeService } from '../../../../shared/services/employee.service';
 
 /* funcion para transformar y acceder a los enum, usados en los modelos ->para los dropdown */
 function enumToOptions<T extends Record<string, unknown>>(enumObj: T): { label: string; value: T[keyof T] }[] {
@@ -22,18 +23,18 @@ function enumToOptions<T extends Record<string, unknown>>(enumObj: T): { label: 
   
 export class CreateEmployeeComponent {
   formEmployee: FormGroup;
-  selectedPhoto: File[] = [];
-  paymentDates: { label: string; value: PaymentDate } [];
-  documentTypes: { label: string; value: docType } [];
+  selectedPhoto: File | null = null; // Cambiado a solo un archivo
+  paymentDates: { label: string; value: PaymentDate }[];
+  documentTypes: { label: string; value: docType }[];
   prefixs: { label: string; value: prefix }[];
   countries: { label: string; value: country }[];
   regions: { label: string; value: region }[];
   provinces: { label: string; value: province }[];
   cities: { label: string; value: string }[];
   documentTypesEmployees: { label: string; value: employDoc }[];
-  selectedDocument: File[] = [];
+  selectedDocument: File[] = []; // Sigue permitiendo múltiples documentos externos
 
-  constructor(private form: FormBuilder) {
+  constructor(private form: FormBuilder, private employeeService: EmployeeService) {
     this.formEmployee = this.form.group({
       name: ['', Validators.required],
       paternal_surname: ['', Validators.required],
@@ -81,6 +82,11 @@ export class CreateEmployeeComponent {
     return salary.toFixed(2);
   }
 
+  formatNumberStreet(number_street: number): string {
+    if (number_street === null) return '';
+    return String(number_street)
+  }
+
   /* alternar segun la provincia escogida que salga la ciudad */
   onProvinceChange() {
     const provinceValue = this.formEmployee.get('province')?.value?.value as province;
@@ -93,30 +99,26 @@ export class CreateEmployeeComponent {
 
   /* Para la subida de imagenes de foto del empleado */
   onImageSelect(event: { files: File[] }) {
-    this.selectedPhoto = Array.from(event.files);
-    for (const file of event.files) {
-      if (!this.selectedPhoto.includes(file)) {
-        this.selectedPhoto.push(file);
-      }
-    }
+    // Asignar el primer archivo seleccionado, si existe
+    this.selectedPhoto = event.files.length > 0 ? event.files[0] : null;
   }
+
   onImageRemove(event: any) {
-    const removedFile = event.file;
-    this.selectedPhoto = this.selectedPhoto.filter(file => file.name !== removedFile.name);
+    this.selectedPhoto = null; // Reseteamos el archivo seleccionado
   }
 
   /* Para la subida de documentos externos del empleado */
   onFileSelect(event: { files: File[] }) {
     this.selectedDocument = Array.from(event.files);
-    
   }
+
   onFileRemove(event: any) {
     const removedFile = event.file;
     this.selectedDocument = this.selectedDocument.filter(file => file.name !== removedFile.name);
   }
 
   onSubmit() {
-    const { type, prefix, country, region, province, city, document_number, phone_number, street, number_street, email, password, files, document_type_employ, ...rawValue } = this.formEmployee.value;
+    const { type, prefix, country, region, province, city, document_number, phone_number, street, number_street, email, password, document_type_employ, ...rawValue } = this.formEmployee.value;
     const formattedDate = this.formatDate(rawValue.date_of_birth);
     const formattedSalary = this.formatSalary(rawValue.salary);
     const paymentDateValue = this.formEmployee.get('payment_date')?.value?.value;
@@ -126,21 +128,34 @@ export class CreateEmployeeComponent {
     const regionValue = this.formEmployee.get('region')?.value?.value;
     const provinceValue = this.formEmployee.get('province')?.value?.value;
     const cityValue = this.formEmployee.get('city')?.value?.value;
+    const formatNumberStreet = this.formatNumberStreet(number_street);
     const employeeDocValue = this.formEmployee.get('document_type_employ')?.value?.value;
 
-    const result = {
+    const result: storeEmployee = {
       ...rawValue,
       date_of_birth: formattedDate,
       salary: formattedSalary,
-      photo_path: this.selectedPhoto,
+      photo_path: this.selectedPhoto, // Asegúrate de que esto sea compatible con tu modelo
       payment_date: paymentDateValue,
       document_types: documentTypeValue ? [{ type: documentTypeValue, number: document_number }] : [],
       phones: prefixValue ? [{ prefix: prefixValue, number: phone_number }] : [],
-      addresses: countryValue ? [{ country: countryValue, region: regionValue, province: provinceValue, city: cityValue, street: street, number: number_street }] : [],
+      addresses: countryValue ? [{ country: countryValue, region: regionValue, province: provinceValue, city: cityValue, street: street, number: formatNumberStreet }] : [],
       user: email ? { email: email, password: password } : {},
-      employee_documents: employeeDocValue ? [{ document_type: employeeDocValue, document_path: this.selectedDocument}] : []
+      employee_documents: employeeDocValue ? [{ document_type: employeeDocValue }] : []
     };
 
-    console.log(result);
+    if (this.formEmployee.valid) {
+      this.employeeService.storeEmployees(result).subscribe(
+        (response) => {
+          console.log(response.message);
+        },
+        (error) => {
+          console.error('Error al crear el cliente:', error);
+        }
+      );
+    } else {
+      console.log('Formulario no válido');
+      console.log(result);
+    }
   }
 }

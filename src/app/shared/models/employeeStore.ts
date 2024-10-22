@@ -19,7 +19,7 @@ export interface storeEmployee {
 }
 
 export enum PaymentDate{
-    'Fin De Mes' = "fin_de_mes",
+    'Fin De Mes' = "fin de mes",
     'Quincenal' = "Quincenal",
     'Semanal' = "Semanal",
 }

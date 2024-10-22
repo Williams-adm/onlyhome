@@ -4,10 +4,10 @@ export interface DocumentType {
 }
 
 export enum docType{
-    'Dni' = "DNI",
+    'DNI' = "DNI",
     'Pasaporte' = "Pasaporte",
     'Carnet De Extranjeria' = "CARNET_EXT",
-    'Ruc' = "RUC",
+    'RUC' = "RUC",
     'Otros' = "Otros"
 }
 

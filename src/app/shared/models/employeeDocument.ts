@@ -4,7 +4,7 @@ export interface EmployeeDocument {
 }
 
 export enum employDoc{
-    Cv = "Cv",
-    CopiaDeDi = "Copia de di",
-    Otros = "Otros",
+    'Cv' = "Cv",
+    'Copia De Identificación' = "Copia de di",
+    'Otros' = "Otros",
 }
