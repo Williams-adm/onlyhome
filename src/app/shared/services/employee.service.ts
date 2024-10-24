@@ -30,7 +30,7 @@ export class EmployeeService {
     )
   }
 
-  public storeEmployees(employee: storeEmployee): Observable<{ message: string }>{
+  public storeEmployees(employee: FormData): Observable<{ message: string }>{
     return this.http.post<{ message: string }>(
       `${environment.backendBaseUrl}/api/v1/employees`, employee
     )

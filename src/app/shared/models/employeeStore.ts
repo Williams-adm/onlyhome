@@ -8,8 +8,8 @@ export interface storeEmployee {
     name?:               string;
     paternal_surname?:   string;
     maternal_surname?:   string;
-    date_of_birth?:      Date;
-    salary?:             number;
+    date_of_birth?:      string;
+    salary?:             string;
     payment_date?:       PaymentDate;
     document_types?:     DocumentType[];
     phones?:             Phone[];

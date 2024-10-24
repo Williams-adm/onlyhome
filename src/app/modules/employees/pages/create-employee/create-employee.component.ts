@@ -130,12 +130,13 @@ export class CreateEmployeeComponent {
     const cityValue = this.formEmployee.get('city')?.value?.value;
     const formatNumberStreet = this.formatNumberStreet(number_street);
     const employeeDocValue = this.formEmployee.get('document_type_employ')?.value?.value;
-
+    
     const result: storeEmployee = {
-      ...rawValue,
+      name: rawValue.name,
+      paternal_surname: rawValue.paternal_surname,
+      maternal_surname: rawValue.maternal_surname,
       date_of_birth: formattedDate,
       salary: formattedSalary,
-      photo_path: this.selectedPhoto, // Asegúrate de que esto sea compatible con tu modelo
       payment_date: paymentDateValue,
       document_types: documentTypeValue ? [{ type: documentTypeValue, number: document_number }] : [],
       phones: prefixValue ? [{ prefix: prefixValue, number: phone_number }] : [],
@@ -144,8 +145,15 @@ export class CreateEmployeeComponent {
       employee_documents: employeeDocValue ? [{ document_type: employeeDocValue }] : []
     };
 
+    const formData = new FormData();
+    formData.append('employeeData', JSON.stringify(result));
+
+    if (this.selectedPhoto) {
+      formData.append('photo_path', this.selectedPhoto);
+    }
+    
     if (this.formEmployee.valid) {
-      this.employeeService.storeEmployees(result).subscribe(
+      this.employeeService.storeEmployees(formData).subscribe(
         (response) => {
           console.log(response.message);
         },
@@ -155,7 +163,6 @@ export class CreateEmployeeComponent {
       );
     } else {
       console.log('Formulario no válido');
-      console.log(result);
     }
   }
 }
