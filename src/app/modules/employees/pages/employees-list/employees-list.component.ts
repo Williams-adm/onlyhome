@@ -44,8 +44,8 @@ export class EmployeesListComponent implements OnInit {
       error => {
         console.error("Error al cargar a los empleados", error)
         this.loading = false;
-        }
-      );
+      }
+    );
   }
 
   showDialog(id : number) {
@@ -70,5 +70,4 @@ export class EmployeesListComponent implements OnInit {
       }
     );
 }
-
 }

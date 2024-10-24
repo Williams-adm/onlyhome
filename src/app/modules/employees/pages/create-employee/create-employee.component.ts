@@ -99,12 +99,11 @@ export class CreateEmployeeComponent {
 
   /* Para la subida de imagenes de foto del empleado */
   onImageSelect(event: { files: File[] }) {
-    // Asignar el primer archivo seleccionado, si existe
     this.selectedPhoto = event.files.length > 0 ? event.files[0] : null;
   }
 
   onImageRemove(event: any) {
-    this.selectedPhoto = null; // Reseteamos el archivo seleccionado
+    this.selectedPhoto = null;
   }
 
   /* Para la subida de documentos externos del empleado */
@@ -142,7 +141,7 @@ export class CreateEmployeeComponent {
       phones: prefixValue ? [{ prefix: prefixValue, number: phone_number }] : [],
       addresses: countryValue ? [{ country: countryValue, region: regionValue, province: provinceValue, city: cityValue, street: street, number: formatNumberStreet }] : [],
       user: email ? { email: email, password: password } : {},
-      employee_documents: employeeDocValue ? [{ document_type: employeeDocValue }] : []
+      employee_documents: []
     };
 
     const formData = new FormData();
@@ -151,6 +150,17 @@ export class CreateEmployeeComponent {
     if (this.selectedPhoto) {
       formData.append('photo_path', this.selectedPhoto);
     }
+
+  this.selectedDocument.forEach((file, index) => {
+    const documentType = this.formEmployee.get(`document_type_employ[${index}]`)?.value?.value; // Obtener el tipo de documento correspondiente al archivo actual
+
+    if (documentType) {
+      // Agregar el tipo de documento al FormData
+      formData.append(`employee_documents[${index}][document_type]`, documentType);
+      // Agregar el archivo al FormData
+      formData.append(`employee_documents[${index}][document_path]`, file);
+    }
+  });
     
     if (this.formEmployee.valid) {
       this.employeeService.storeEmployees(formData).subscribe(

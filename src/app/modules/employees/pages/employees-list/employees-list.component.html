@@ -18,7 +18,13 @@
         <ng-template pTemplate="body" let-employee let-i="rowIndex">
             <tr class="prueba">
                 <td>{{ i + 1 }}</td>
-                <td><img [src]="env.backendBaseUrl + employee.photo" alt="foto-empleado"></td>
+                <td>
+                    <img *ngIf="employee.photo.startsWith('Employee'); else defaultProfile"
+                    [src]="env.backendBaseUrl + '/storage/' +employee.photo" alt="foto-empleado">
+                    <ng-template #defaultProfile>
+                        <img [src]="env.backendBaseUrl + '/img/employee-without-photo.png'" alt="foto-empleado">
+                    </ng-template>
+                </td>
                 <td>{{ employee.full_name }}</td>
                 <td>{{ employee.registration_date }}</td>
                 <td>{{ employee.user.email }}</td>
@@ -41,7 +47,11 @@
     <p-dialog [header]="selectedEmployee ? (selectedEmployee.name + ' ' + selectedEmployee.last_name) : 'Empleado'" [modal]="true" [(visible)]="visible" [style]="{ width: '50rem' }">
         <ng-container *ngIf="selectedEmployee">
             <div>
-                <img [src]="env.backendBaseUrl +selectedEmployee.photo_path" alt="Foto de {{ selectedEmployee.name }}" class="profile"/>
+                <img *ngIf="selectedEmployee.photo_path?.startsWith('Employee'); else defaultProfile"
+                    [src]="env.backendBaseUrl + '/storage/' + selectedEmployee.photo_path" alt="foto-empleado">
+                <ng-template #defaultProfile>
+                    <img [src]="env.backendBaseUrl + '/img/employee-without-photo.png'" alt="foto-empleado">
+                </ng-template>
             </div>
             <section>
                 <h3>Información</h3>
