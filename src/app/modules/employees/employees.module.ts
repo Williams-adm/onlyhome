@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EmployeesListComponent } from './pages/employees-list/employees-list.component';
 import { EmployeesRoutingModule } from './employees-routing.module';
-import { HttpClientJsonpModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
@@ -23,7 +23,7 @@ import { FileUploadModule } from 'primeng/fileupload';
   imports: [
     CommonModule,
     EmployeesRoutingModule,
-    HttpClientJsonpModule,
+    HttpClientModule,
     TableModule,
     ButtonModule,
     DialogModule,
@@ -35,6 +35,7 @@ import { FileUploadModule } from 'primeng/fileupload';
     DropdownModule,
     PasswordModule,
     FileUploadModule,
+    
   ]
 })
 export class EmployeesModule { }
