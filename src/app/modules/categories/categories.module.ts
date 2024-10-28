@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CategoriesListComponent } from './pages/categories-list/categories-list.component';
+import { CategoriesRoutingModule } from './categories-routing.module';
 
 
 
@@ -9,7 +10,8 @@ import { CategoriesListComponent } from './pages/categories-list/categories-list
     CategoriesListComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    CategoriesRoutingModule
   ]
 })
 export class CategoriesModule { }
