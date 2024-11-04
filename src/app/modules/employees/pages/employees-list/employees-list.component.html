@@ -1,4 +1,43 @@
-<h1>My Employees</h1>
+<header><h1 class="text-center text-mainTitle">MIS EMPLEADOS</h1></header>
+
+<button routerLink="create" class="text-button rounded-lg bg-buttonGO p-2" >Registrar Empleado</button>
+
+<table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Foto</th>
+            <th>Nombres</th>
+            <th>Registro</th>
+            <th>Correo</th>
+            <th>Opciones</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let employee of employeesList; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>
+                <img *ngIf="employee.photo.startsWith('Employee'); else defaultProfile"
+                [src]="env.backendBaseUrl + '/storage/' + employee.photo" alt="foto empleado">
+                <ng-template #defaultProfile>
+                    <img [src]="env.backendBaseUrl + '/img/employee-without-photo.png'" alt="empleado sin foto">
+                </ng-template>
+            </td>
+            <td>{{ employee.full_name }}</td>
+            <td>{{ employee.registration_date }}</td>
+            <td>{{ employee.user.email }}</td>
+            <td>
+                <section>
+                    
+                </section>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- <h1>My Employees</h1>
 <p-button routerLink="create">Registrar Empleado</p-button>
 
 <div class="card">
@@ -96,4 +135,4 @@
         </section>
         </ng-container>
     </p-dialog>
-</div>
+</div> -->
