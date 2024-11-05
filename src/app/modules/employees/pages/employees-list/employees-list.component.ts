@@ -12,6 +12,9 @@ import { Data, showEmployee } from '../../../../shared/models/employeeShow';
 })
   
 export class EmployeesListComponent implements OnInit {
+  totalRecord: number = 0; // Total de registros (empleados)
+  first: number = 0; // El primer índice de la página
+  rows: number = 15; // Número de filas por página
   employeesList: Datum[] = [];
   meta: Meta | undefined;
   env = environment;
@@ -69,5 +72,11 @@ export class EmployeesListComponent implements OnInit {
         console.error('Error al actualizar el estado del empleado', error);
       }
     );
-}
+  }
+  
+  onPageChange(event: any): void {
+    this.first = event.first; // Primer índice de la página
+    this.rows = event.rows; // Número de filas por página
+    this.loadEmployees(event); // Cargar empleados según la nueva página
+  }
 }

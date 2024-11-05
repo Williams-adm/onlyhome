@@ -14,6 +14,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { DropdownModule } from 'primeng/dropdown';
 import { PasswordModule } from 'primeng/password';
 import { FileUploadModule } from 'primeng/fileupload'; */
+import { PaginatorModule } from 'primeng/paginator';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { FileUploadModule } from 'primeng/fileupload'; */
     DropdownModule,
     PasswordModule,
     FileUploadModule, */
-    
+    PaginatorModule
   ]
 })
 export class EmployeesModule { }
