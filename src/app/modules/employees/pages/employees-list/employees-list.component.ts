@@ -12,14 +12,10 @@ import { Data, showEmployee } from '../../../../shared/models/employeeShow';
 })
   
 export class EmployeesListComponent implements OnInit {
-  totalRecord: number = 0; // Total de registros (empleados)
-  first: number = 0; // El primer índice de la página
-  rows: number = 15; // Número de filas por página
   employeesList: Datum[] = [];
   meta: Meta | undefined;
   env = environment;
   totalRecords: number = 0;
-  loading: boolean = false;
   visible: boolean = false;
   selectedEmployee: Data | null = null;
 
@@ -30,9 +26,6 @@ export class EmployeesListComponent implements OnInit {
   }
 
   loadEmployees(event: any) {
-    if (this.loading) return;
-
-    this.loading = true;
 
     const page = event.first / event.rows + 1;
     const perPage = event.rows;
@@ -42,15 +35,14 @@ export class EmployeesListComponent implements OnInit {
       .subscribe((data: indexEmployees) => {
         this.employeesList = data.data;
         this.totalRecords = data.meta.total;
-        this.loading = false;
       },
       error => {
         console.error("Error al cargar a los empleados", error)
-        this.loading = false;
       }
     );
   }
 
+  /* funcion para ver 1 empleado en especifico */
   showDialog(id : number) {
     this.employeeService.showEmployees(id).subscribe((data: showEmployee) => {
       this.visible = true;
@@ -58,6 +50,7 @@ export class EmployeesListComponent implements OnInit {
     })
   }
 
+  /* Funcion para el status del empleado */
   onToggleChange(employeeId: number, currentStatus: number): void {
   const newStatus = currentStatus === 1 ? 0 : 1;
   this.employeeService.patchEmployees(employeeId, { user: { status: newStatus } })
@@ -74,9 +67,4 @@ export class EmployeesListComponent implements OnInit {
     );
   }
   
-  onPageChange(event: any): void {
-    this.first = event.first; // Primer índice de la página
-    this.rows = event.rows; // Número de filas por página
-    this.loadEmployees(event); // Cargar empleados según la nueva página
-  }
 }
