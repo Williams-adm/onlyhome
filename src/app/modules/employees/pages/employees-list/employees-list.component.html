@@ -17,7 +17,7 @@
 
     <tbody>
         <tr *ngFor="let employee of employeesList; let i = index">
-            <td>{{ i + 1 }}</td>
+            <td>{{ (currentPage - 1) * pageSize + (i + 1) }}</td>
             <td>
                 <img *ngIf="employee.photo.startsWith('Employee'); else defaultProfile"
                 [src]="env.backendBaseUrl + '/storage/' + employee.photo" alt="foto empleado">
@@ -30,7 +30,7 @@
             <td>{{ employee.user.email }}</td>
             <td>
                 <section class="flex justify-between">
-                    <button class="fa-regular fa-user fa-xl"></button>
+                    <button (click)="showDialog(employee.id)" class="fa-regular fa-user fa-xl"></button>
                     <button class="fa-brands fa-whatsapp fa-xl"></button>
                     <button class="fa-regular fa-pen-to-square fa-xl"></button>
                 </section>
@@ -45,124 +45,63 @@
         </tr>
     </tbody>
 </table>
-<div class="flex">
+<div>
     <p-paginator (onPageChange)="loadEmployees($event)" [rows]="15" [totalRecords]="totalRecords"
         [rowsPerPageOptions]="[15, 30, 45]" />
 </div>
 
-<!-- <h1>My Employees</h1>
-<p-button routerLink="create">Registrar Empleado</p-button>
-
-<div class="card">
-    <p-table [value]="employeesList" [paginator]="true" [rows]="15" [totalRecords]="totalRecords" [lazy]="true" [loading]="loading" [tableStyle]="{ 'min-width': '50rem' }"
-        (onLazyLoad)="loadEmployees($event)" [rowsPerPageOptions]="[15, 30, 45]">
-        <ng-template pTemplate="header">
-            <tr>
-                <th style="width:5%">#</th>
-                <th style="width:10%">Foto</th>
-                <th style="width:25%">Nombres</th>
-                <th style="width:10%">Registro</th>
-                <th style="width:20%">Correo</th>
-                <th style="width:25%">Opciones</th>
-                <th style="width:15%">Estado</th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-employee let-i="rowIndex">
-            <tr class="prueba">
-                <td>{{ i + 1 }}</td>
-                <td>
-                    <img *ngIf="employee.photo.startsWith('Employee'); else defaultProfile"
-                    [src]="env.backendBaseUrl + '/storage/' +employee.photo" alt="foto-empleado">
-                    <ng-template #defaultProfile>
-                        <img [src]="env.backendBaseUrl + '/img/employee-without-photo.png'" alt="foto-empleado">
-                    </ng-template>
-                </td>
-                <td>{{ employee.full_name }}</td>
-                <td>{{ employee.registration_date }}</td>
-                <td>{{ employee.user.email }}</td>
-                <td>
-                    <div class="iconos">
-                        <p-button (onClick)="showDialog(employee.id)" icon="pi pi-user"/>
-                        <a href=""><i class="pi pi-pen-to-square" style="font-size: 20px"></i></a>
-                        <a href=""><i class="pi pi-phone" style="font-size: 20px"></i></a>
-                        <a href=""><i class="pi pi-file-edit" style="font-size: 20px"></i></a>
-                    </div>
-                </td>
-                <td><p-toggleButton onLabel="Activo" offLabel="Inactivo" [onIcon]="'pi pi-check'" [offIcon]="'pi pi-times'" [ngModel]="employee.user.status === 1" 
-                (onChange)="onToggleChange(employee.id, employee.user.status)"/></td>
-            </tr>
-        </ng-template>
-    </p-table>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div>
-    <p-dialog [header]="selectedEmployee ? (selectedEmployee.name + ' ' + selectedEmployee.last_name) : 'Empleado'" [modal]="true" [(visible)]="visible" [style]="{ width: '50rem' }">
-        <ng-container *ngIf="selectedEmployee">
-            <div>
-                <img *ngIf="selectedEmployee.photo_path?.startsWith('Employee'); else defaultProfile"
-                    [src]="env.backendBaseUrl + '/storage/' + selectedEmployee.photo_path" alt="foto-empleado">
-                <ng-template #defaultProfile>
-                    <img [src]="env.backendBaseUrl + '/img/employee-without-photo.png'" alt="foto-empleado">
-                </ng-template>
+<p-dialog [header]="selectedEmployee ? (selectedEmployee.name + ' ' + selectedEmployee.last_name) : 'Empleado'" 
+    [modal]="true" [(visible)]="visible" draggable="false">
+    <div *ngIf="selectedEmployee" class="bg-slate-200">
+        <section>
+            <img *ngIf="selectedEmployee?.photo_path?.startsWith('Employee'); else defaultProfile" 
+                [src]="env.backendBaseUrl + '/storage/' + selectedEmployee.photo_path" alt="foto-empleado">
+            <ng-template #defaultProfile>
+                <img [src]="env.backendBaseUrl + '/img/employee-without-photo.png'" alt="foto-empleado">
+            </ng-template>
+        </section>
+        <section>
+            <h3>Información</h3>
+            <p><strong>Correo Electronico: </strong>{{selectedEmployee.user.email}}</p>
+            <p><strong>Fecha de Nacimiento: </strong>{{selectedEmployee.date_of_birth}}</p>
+            <p><strong>Salario : </strong>S/. {{selectedEmployee.salary}}</p>
+            <p><strong>Fecha de Pago : </strong>{{selectedEmployee.payment_date}}</p>
+        </section>
+        <section>
+            <h3>Documento</h3>
+            <div *ngFor="let docType of selectedEmployee.document_types">
+                <p><strong>Tipo: </strong>{{ docType.type }}</p>
+                <p><strong>Numero: </strong>{{ docType.number }}</p>
             </div>
-            <section>
-                <h3>Información</h3>
-                <p><strong>Correo Electronico: </strong>{{selectedEmployee.user.email}}</p>
-                <p><strong>Fecha de Nacimiento: </strong>{{selectedEmployee.date_of_birth}}</p>
-                <p><strong>Salario : </strong>S/. {{selectedEmployee.salary}}</p>
-                <p><strong>Fecha de Pago : </strong>{{selectedEmployee.payment_date}}</p>
-            </section>
-            <section>
-                <h3>Documento</h3>
-                <div *ngFor="let docType of selectedEmployee?.document_types">
-                    <p><strong>Tipo: </strong>{{ docType.type }}</p>
-                    <p><strong>Numero: </strong>{{ docType.number }}</p>
-                </div>
-            </section>
-            <section>
-                <h3>Telefono</h3>
-                <div *ngFor="let phone of selectedEmployee?.phones">
-                    <p><strong>Numero: </strong>{{ phone.number }}</p>
-                </div>
-            </section>
-            <section>
-                <h3>Direccion</h3>
-                <div *ngFor="let address of selectedEmployee?.address">
-                    <p><strong>Pais: </strong>{{ address.country }}</p>
-                    <p><strong>Region: </strong>{{ address.region }}</p>
-                    <p><strong>Provincia: </strong>{{ address.province }}</p>
-                    <p><strong>Ciudad: </strong>{{ address.city }}</p>
-                    <p><strong>Calle: </strong>{{ address.street }}</p>
-                </div>
-            </section>
+        </section>
+        <section>
+            <h3>Telefono</h3>
+            <div *ngFor="let phone of selectedEmployee?.phones">
+                <p><strong>Numero: </strong>{{ phone.number }}</p>
+            </div>
+        </section>
+        <section>
+            <h3>Direccion</h3>
+            <div *ngFor="let address of selectedEmployee?.address">
+                <p><strong>Pais: </strong>{{ address.country }}</p>
+                <p><strong>Region: </strong>{{ address.region }}</p>
+                <p><strong>Provincia: </strong>{{ address.province }}</p>
+                <p><strong>Ciudad: </strong>{{ address.city }}</p>
+                <p><strong>Calle: </strong>{{ address.street }}</p>
+            </div>
+        </section>
         <section>
             <h3>Documentos</h3>
             <div *ngIf="selectedEmployee.documents.length > 0; else noDocuments">
-                <div *ngFor="let document of selectedEmployee.documents">
-                    <a [href]="env.backendBaseUrl + document.document_path" target="_blank" rel="noopener noreferrer">{{ document.document_type }}</a>
+                <div *ngFor="let document of selectedEmployee?.documents">
+                    <a [href]="env.backendBaseUrl + document.document_path" target="_blank" rel="noopener noreferrer">
+                    {{document.document_type}}
+                    </a>
                 </div>
             </div>
             <ng-template #noDocuments>
-                <p>No tiene documentos subidos.</p>
+            <p>No tiene documentos subidos</p>
             </ng-template>
         </section>
-        </ng-container>
-    </p-dialog>
-</div> -->
+    </div>
+</p-dialog>

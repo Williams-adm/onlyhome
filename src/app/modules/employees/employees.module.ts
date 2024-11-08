@@ -3,18 +3,18 @@ import { CommonModule } from '@angular/common';
 import { EmployeesListComponent } from './pages/employees-list/employees-list.component';
 import { EmployeesRoutingModule } from './employees-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { CreateEmployeeComponent } from './pages/create-employee/create-employee.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PaginatorModule } from 'primeng/paginator';
+import { DialogModule } from 'primeng/dialog'; 
 /* import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
-import { DialogModule } from 'primeng/dialog'; */
-import { CreateEmployeeComponent } from './pages/create-employee/create-employee.component';
 /* import { ToggleButtonModule } from 'primeng/togglebutton'; */
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 /* import { CalendarModule } from 'primeng/calendar';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DropdownModule } from 'primeng/dropdown';
 import { PasswordModule } from 'primeng/password';
 import { FileUploadModule } from 'primeng/fileupload'; */
-import { PaginatorModule } from 'primeng/paginator';
 
 @NgModule({
   declarations: [
@@ -25,18 +25,19 @@ import { PaginatorModule } from 'primeng/paginator';
     CommonModule,
     EmployeesRoutingModule,
     HttpClientModule,
-/*     TableModule,
-    ButtonModule,
-    DialogModule,
-    ToggleButtonModule, */
     FormsModule, 
     ReactiveFormsModule,
+    PaginatorModule,
+    DialogModule,
+/*     TableModule,
+    ButtonModule,
+    ToggleButtonModule, */
 /*     CalendarModule,
     InputNumberModule,
     DropdownModule,
     PasswordModule,
     FileUploadModule, */
-    PaginatorModule
   ]
 })
+  
 export class EmployeesModule { }

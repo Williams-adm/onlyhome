@@ -13,25 +13,28 @@ import { Data, showEmployee } from '../../../../shared/models/employeeShow';
   
 export class EmployeesListComponent implements OnInit {
   employeesList: Datum[] = [];
-  meta: Meta | undefined;
   env = environment;
+  currentPage: number = 1;
+  pageSize: number = 15;
   totalRecords: number = 0;
   visible: boolean = false;
   selectedEmployee: Data | null = null;
 
   constructor(private employeeService: EmployeeService) {}
 
+  /* inicializando el componente y trae los datos al cargar la pagina, y cuando se pagina*/
   ngOnInit(): void {
     this.loadEmployees({ first: 0, rows: 15 });
   }
 
+  /* Se usa para llenar el employeeList y ser usado por el ngOinit */
   loadEmployees(event: any) {
-
     const page = event.first / event.rows + 1;
-    const perPage = event.rows;
+    this.currentPage = page;
+    this.pageSize = event.rows;
 
     this.employeeService
-      .indexEmployees(page, perPage)
+      .indexEmployees(page, event.rows)
       .subscribe((data: indexEmployees) => {
         this.employeesList = data.data;
         this.totalRecords = data.meta.total;

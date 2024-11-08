@@ -1,19 +1,24 @@
-<!-- <h1>REGISTRAR EMPLEADO</h1>
+<h1>REGISTRAR EMPLEADO</h1>
 <form [formGroup]="formEmployee" (ngSubmit)="onSubmit()">
     <section>
-        <div>
-            <label for="name">Nombres: </label>
-            <input type="text" id="name" name="name" formControlName="name" pInputText autocomplete="given-name"/>
-        </div>
-        <div>
-            <label for="paternalSurname">Apellido Paterno: </label>
-            <input type="text" id="paternalSurname" name="paternal_surname" formControlName="paternal_surname" pInputText/>
-        </div>
-        <div>
-            <label for="maternalSurname">Apellido Materno: </label>
-            <input type="text" id="maternalSurname" name="maternal_surname" formControlName="maternal_surname" pInputText/>
-        </div>
-        <div>
+        <label>Nombres: 
+            <input type="text" id="name" name="name" formControlName="name">
+        </label>
+        <label>Apellido Paterno: 
+            <input type="text" id="paternalSurname" name="paternal_surname" formControlName="paternal_surname">
+        </label>
+        <label>Apellido Materno: 
+            <input type="text" id="maternalSurname" name="maternal_surname" formControlName="maternal_surname">
+        </label>
+        <label>Fecha de Nacimiento:
+            <input type="date" name="date_of_birth" formControlName="date_of_birth">
+
+        </label>
+    </section>
+</form>
+<!-- 
+<form [formGroup]="formEmployee" (ngSubmit)="onSubmit()">
+    <section>
             <label for="dateOfBirth">Fecha De Nacimiento: </label>
             <p-calendar inputId="dateOfBirth" name="date_of_birth" formControlName="date_of_birth" [dateFormat]="'dd-mm-yy'"/>
         </div>
