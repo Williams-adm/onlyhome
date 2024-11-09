@@ -7,14 +7,10 @@ import { CreateEmployeeComponent } from './pages/create-employee/create-employee
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginatorModule } from 'primeng/paginator';
 import { DialogModule } from 'primeng/dialog'; 
-/* import { TableModule } from 'primeng/table';
-import { ButtonModule } from 'primeng/button';
-/* import { ToggleButtonModule } from 'primeng/togglebutton'; */
-/* import { CalendarModule } from 'primeng/calendar';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DropdownModule } from 'primeng/dropdown';
+import { FileUploadModule } from 'primeng/fileupload';
 import { PasswordModule } from 'primeng/password';
-import { FileUploadModule } from 'primeng/fileupload'; */
 
 @NgModule({
   declarations: [
@@ -29,14 +25,10 @@ import { FileUploadModule } from 'primeng/fileupload'; */
     ReactiveFormsModule,
     PaginatorModule,
     DialogModule,
-/*     TableModule,
-    ButtonModule,
-    ToggleButtonModule, */
-/*     CalendarModule,
     InputNumberModule,
     DropdownModule,
-    PasswordModule,
-    FileUploadModule, */
+    FileUploadModule,
+    PasswordModule
   ]
 })
   

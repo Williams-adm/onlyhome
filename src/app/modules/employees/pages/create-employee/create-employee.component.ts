@@ -32,14 +32,14 @@ export class CreateEmployeeComponent {
   provinces: { label: string; value: province }[];
   cities: { label: string; value: string }[];
   documentTypesEmployees: { label: string; value: employDoc }[];
-  selectedDocument: File[] = []; // Sigue permitiendo múltiples documentos externos
+  selectedDocument: File[] = []; // Permite la entrada de múltiples documentos externos
 
   constructor(private form: FormBuilder, private employeeService: EmployeeService) {
     this.formEmployee = this.form.group({
       name: ['', Validators.required],
       paternal_surname: ['', Validators.required],
       maternal_surname: ['', Validators.required],
-      date_of_birth: [null],
+      date_of_birth: ['', Validators.required],
       salary: new FormControl(),
       payment_date: new FormControl<PaymentDate | null>(null),
       type: new FormControl<docType | null>(null),
@@ -68,13 +68,13 @@ export class CreateEmployeeComponent {
   }
 
   /* formateador de fecha */
-  formatDate(date: Date | null): string {
+  /* formatDate(date: Date | null): string {
     if (!date) return '';
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = date.getFullYear();
     return `${day}-${month}-${year}`;
-  }
+  } */
 
   /* formateador a decimal en cadena */
   formatSalary(salary: number | null): string {
@@ -118,7 +118,7 @@ export class CreateEmployeeComponent {
 
   onSubmit() {
     const { type, prefix, country, region, province, city, document_number, phone_number, street, number_street, email, password, document_type_employ, ...rawValue } = this.formEmployee.value;
-    const formattedDate = this.formatDate(rawValue.date_of_birth);
+    /* const formattedDate = this.formatDate(rawValue.date_of_birth); */
     const formattedSalary = this.formatSalary(rawValue.salary);
     const paymentDateValue = this.formEmployee.get('payment_date')?.value?.value;
     const documentTypeValue = this.formEmployee.get('type')?.value?.value;
@@ -134,7 +134,7 @@ export class CreateEmployeeComponent {
       name: rawValue.name,
       paternal_surname: rawValue.paternal_surname,
       maternal_surname: rawValue.maternal_surname,
-      date_of_birth: formattedDate,
+      date_of_birth: rawValue.date_of_birth,
       salary: formattedSalary,
       payment_date: paymentDateValue,
       document_types: documentTypeValue ? [{ type: documentTypeValue, number: document_number }] : [],
@@ -173,6 +173,7 @@ export class CreateEmployeeComponent {
       );
     } else {
       console.log('Formulario no válido');
+      console.log(result)
     }
   }
 }
