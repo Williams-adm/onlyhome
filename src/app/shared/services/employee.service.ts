@@ -21,7 +21,8 @@ export class EmployeeService {
       .set('per_page', perPage.toString());
 
     return this.http.get<indexEmployees>(
-      `${environment.backendBaseUrl}/api/v1/employees`, { params });
+      `${environment.backendBaseUrl}/api/v1/employees`, { params }
+    );
   }
 
   public showEmployees(id: Number): Observable<showEmployee> {

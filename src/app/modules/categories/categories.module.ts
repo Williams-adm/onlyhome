@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CategoriesListComponent } from './pages/categories-list/categories-list.component';
 import { CategoriesRoutingModule } from './categories-routing.module';
 import { LayoutModule } from '../layout/layout.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -13,6 +14,7 @@ import { LayoutModule } from '../layout/layout.module';
   imports: [
     CommonModule,
     CategoriesRoutingModule,
+    HttpClientModule,
     LayoutModule
   ]
 })

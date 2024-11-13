@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../../../environments/environment.development';
-import { Datum, indexEmployees, Meta } from '../../../../shared/models/employeeIndex';
+import { Datum, indexEmployees } from '../../../../shared/models/employeeIndex';
 import { EmployeeService } from '../../../../shared/services/employee.service';
 import { Data, showEmployee } from '../../../../shared/models/employeeShow';
 

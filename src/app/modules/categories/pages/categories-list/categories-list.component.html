@@ -1,1 +1,28 @@
-<!-- <p>Aqui se listan las categoriass</p> -->
+<h1 class="text-center text-mainTitle">CATEGORIAS</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th>Descipción</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let category of categoriesList; let i = index">
+            <td>{{ (currentPage - 1) * pageSize + (i + 1) }}</td>
+            <td>{{ category.name }}</td>
+            <td>{{ category.description }}</td>
+            <td>
+                <input type="checkbox" [id]="'status-' + i" class="peer hidden" [checked]="category.status === 1"
+                    (change)="onToggleChange(category.id, category.status)">
+                <label [for]="'status-' + i"
+                    class="w-16 h-6 bg-stone-300 rounded inline-flex transition-colors duration-300 ease-in-out cursor-pointer peer-checked:bg-buttonGO items-center justify-center">
+                    <span *ngIf="category.status === 1">Activo</span>
+                    <span *ngIf="category.status !== 1">Inactivo</span>
+                </label>
+            </td>
+        </tr>
+    </tbody>
+</table>
