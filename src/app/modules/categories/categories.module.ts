@@ -4,7 +4,7 @@ import { CategoriesListComponent } from './pages/categories-list/categories-list
 import { CategoriesRoutingModule } from './categories-routing.module';
 import { LayoutModule } from '../layout/layout.module';
 import { HttpClientModule } from '@angular/common/http';
-
+import { PaginatorModule } from 'primeng/paginator';
 
 
 @NgModule({
@@ -15,7 +15,8 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule,
     CategoriesRoutingModule,
     HttpClientModule,
-    LayoutModule
+    LayoutModule,
+    PaginatorModule
   ]
 })
 export class CategoriesModule { }

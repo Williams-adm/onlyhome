@@ -26,3 +26,7 @@
         </tr>
     </tbody>
 </table>
+<div>
+    <p-paginator (onPageChange)="loadCategory($event)" [rows]="15" [totalRecords]="totalRecords"
+        [rowsPerPageOptions]="[15, 30, 45]" />
+</div>
