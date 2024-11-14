@@ -18,7 +18,7 @@
                 <input type="checkbox" [id]="'status-' + i" class="peer hidden" [checked]="category.status === 1"
                     (change)="onToggleChange(category.id, category.status)">
                 <label [for]="'status-' + i"
-                    class="w-16 h-6 bg-stone-300 rounded inline-flex transition-colors duration-300 ease-in-out cursor-pointer peer-checked:bg-buttonGO items-center justify-center">
+                    class="w-16 h-6 bg-stone-300 rounded inline-flex transition-colors ease-in-out cursor-pointer peer-checked:bg-buttonGO items-center justify-center">
                     <span *ngIf="category.status === 1">Activo</span>
                     <span *ngIf="category.status !== 1">Inactivo</span>
                 </label>

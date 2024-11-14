@@ -11,6 +11,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { DropdownModule } from 'primeng/dropdown';
 import { FileUploadModule } from 'primeng/fileupload';
 import { PasswordModule } from 'primeng/password';
+import { LayoutModule } from '../layout/layout.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { PasswordModule } from 'primeng/password';
     CommonModule,
     EmployeesRoutingModule,
     HttpClientModule,
+    LayoutModule,
     FormsModule, 
     ReactiveFormsModule,
     PaginatorModule,
