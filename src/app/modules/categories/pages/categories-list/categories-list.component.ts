@@ -1,19 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { Datum, indexCategories } from '../../../../shared/models/category/categoryIndex';
 import { CategoryService } from '../../../../shared/services/category/category.service';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-categories-list',
   templateUrl: './categories-list.component.html',
-  styleUrl: './categories-list.component.css'
+  styleUrl: './categories-list.component.css',
+  providers: [ConfirmationService, MessageService],
 })
+  
 export class CategoriesListComponent implements OnInit{
   categoriesList: Datum[] = []; /* almacenamos la data */
   currentPage: number = 1; /* pagina actual */
   pageSize: number = 15; /* cantidad mostrada por pagina */
   totalRecords: number = 0; /* total de datos que existe */
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(private categoryService: CategoryService, private confirmationService: ConfirmationService, private messageService: MessageService) { }
   
   ngOnInit(): void {
     this.loadCategory({ first: 0, rows: 15 })
@@ -34,6 +37,19 @@ export class CategoriesListComponent implements OnInit{
           console.error("Error al cargar las categorias", error)
         }
     );
+  }
+
+  confirmationOnToggleChange() {
+    this.confirmationService.confirm({
+      header: '¿Esta seguro que desea desabilitarlo?',
+      message: 'Por favor, confirme',
+      accept: () => {
+        this.messageService.add({ severity: 'success', summary: 'Confirmado', detail: 'El estado del empleado ha sido deshabilitado' })
+      },
+      reject: () => {
+        this.messageService.add({ severity: 'error', summary: 'Cancelado', detail: 'No se hizo ningun cambio' })
+      }
+    })
   }
 
   onToggleChange(categoryId: number, currentStatus: number): void{

@@ -30,3 +30,29 @@
     <p-paginator (onPageChange)="loadCategory($event)" [rows]="15" [totalRecords]="totalRecords"
         [rowsPerPageOptions]="[15, 30, 45]" />
 </div>
+
+<!-- <p-toast />  mensajes -->
+<!-- <p-confirmDialog>
+    <div>
+        <div>
+            <button>Hola</button>
+            <button>x</button>
+        </div>
+    </div>
+</p-confirmDialog> -->
+
+<p-toast />
+<p-confirmDialog #cd>
+    <ng-template pTemplate="headless" let-message >
+        <section class="bg-gray-500">
+            <span>{{ message.header }}</span>
+            <p>{{ message.message }}</p>
+            <div>
+                <button (click)="cd.accept()">Aceptar</button>
+                <button (click)="cd.reject()">Cancelar</button>
+            </div>
+        </section>
+    </ng-template>
+</p-confirmDialog>
+<!-- Botón para probar -->
+<button (click)="confirmationOnToggleChange()">Prueba</button>

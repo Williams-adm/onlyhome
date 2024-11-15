@@ -5,6 +5,8 @@ import { CategoriesRoutingModule } from './categories-routing.module';
 import { LayoutModule } from '../layout/layout.module';
 import { HttpClientModule } from '@angular/common/http';
 import { PaginatorModule } from 'primeng/paginator';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -16,7 +18,9 @@ import { PaginatorModule } from 'primeng/paginator';
     CategoriesRoutingModule,
     HttpClientModule,
     LayoutModule,
-    PaginatorModule
+    PaginatorModule,
+    ConfirmDialogModule,
+    ToastModule,
   ]
 })
 export class CategoriesModule { }
