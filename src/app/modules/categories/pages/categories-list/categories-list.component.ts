@@ -39,20 +39,24 @@ export class CategoriesListComponent implements OnInit{
     );
   }
 
-  confirmationOnToggleChange() {
+  confirmationOnToggleChange(categoryId: number, currentStatus: number) {
+    const action = currentStatus === 1 ? 'deshabilitarlo' : 'habilitarlo';
+    const action2 = currentStatus === 1 ? 'deshabilitado' : 'habilitado';
+    
     this.confirmationService.confirm({
-      header: '¿Esta seguro que desea desabilitarlo?',
+      header: `¿Esta seguro que desea ${action}?`,
       message: 'Por favor, confirme',
       accept: () => {
-        this.messageService.add({ severity: 'success', summary: 'Confirmado', detail: 'El estado del empleado ha sido deshabilitado' })
+        this.updateCategoryStatus(categoryId, currentStatus);
+        this.messageService.add({ severity: 'success', summary: 'Confirmado', detail: `El estado del empleado ha sido ${action2}`, life:2000 })
       },
       reject: () => {
-        this.messageService.add({ severity: 'error', summary: 'Cancelado', detail: 'No se hizo ningun cambio' })
+        this.messageService.add({ severity: 'error', summary: 'Cancelado', detail: 'No se hizo ningun cambio', life:2000 })
       }
     })
   }
 
-  onToggleChange(categoryId: number, currentStatus: number): void{
+  updateCategoryStatus(categoryId: number, currentStatus: number): void{
     const newStatus = currentStatus === 1 ? 0 : 1;
     this.categoryService.patchCategories(categoryId, { status: newStatus })
       .subscribe(
@@ -63,7 +67,8 @@ export class CategoriesListComponent implements OnInit{
           }
         },
         error => {
-          console.error('Error al actualizar el estado de la categoría', error)
+          console.error('Error al actualizar el estado de la categoría', error);
+          this.messageService.add({ severity: 'error', summary: 'Error', detail: 'No se pudo actualizar el estado de la categoría' });
         }
       )
   }

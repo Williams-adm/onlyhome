@@ -1,5 +1,7 @@
 <h1 class="text-center text-mainTitle">CATEGORIAS</h1>
 
+<app-create-category></app-create-category>
+
 <table>
     <thead>
         <tr>
@@ -15,12 +17,12 @@
             <td>{{ category.name }}</td>
             <td>{{ category.description }}</td>
             <td>
-                <input type="checkbox" [id]="'status-' + i" class="peer hidden" [checked]="category.status === 1"
-                    (change)="onToggleChange(category.id, category.status)">
+                <input type="checkbox" [id]="'status-' + i" class="hidden" [checked]="category.status === 1"
+                    (click)="confirmationOnToggleChange(category.id, category.status)">
                 <label [for]="'status-' + i"
-                    class="w-16 h-6 bg-stone-300 rounded inline-flex transition-colors ease-in-out cursor-pointer peer-checked:bg-buttonGO items-center justify-center">
-                    <span *ngIf="category.status === 1">Activo</span>
-                    <span *ngIf="category.status !== 1">Inactivo</span>
+                    class="w-16 h-6 rounded inline-flex cursor-pointer items-center justify-center" 
+                    [ngClass]="{'bg-buttonGO': category.status === 1, 'bg-stone-300': category.status === 0}">
+                    <span>{{ category.status === 1 ? 'Activo' : 'Inactivo' }}</span>
                 </label>
             </td>
         </tr>
@@ -30,16 +32,6 @@
     <p-paginator (onPageChange)="loadCategory($event)" [rows]="15" [totalRecords]="totalRecords"
         [rowsPerPageOptions]="[15, 30, 45]" />
 </div>
-
-<!-- <p-toast />  mensajes -->
-<!-- <p-confirmDialog>
-    <div>
-        <div>
-            <button>Hola</button>
-            <button>x</button>
-        </div>
-    </div>
-</p-confirmDialog> -->
 
 <p-toast />
 <p-confirmDialog #cd>
@@ -54,5 +46,3 @@
         </section>
     </ng-template>
 </p-confirmDialog>
-<!-- Botón para probar -->
-<button (click)="confirmationOnToggleChange()">Prueba</button>

@@ -7,11 +7,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { PaginatorModule } from 'primeng/paginator';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
+import { CreateCategoryComponent } from './pages/create-category/create-category.component';
 
 
 @NgModule({
   declarations: [
-    CategoriesListComponent
+    CategoriesListComponent,
+    CreateCategoryComponent
   ],
   imports: [
     CommonModule,
