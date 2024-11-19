@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-create-category',
@@ -6,5 +7,21 @@ import { Component } from '@angular/core';
   styleUrl: './create-category.component.css'
 })
 export class CreateCategoryComponent {
+  maskStyle = {
+    'position': 'absolute',
+  }
+  visible: boolean = false;
+  formCategory: FormGroup;
+  
+  showdialog() {
+    this.visible = true
+  }
+
+  constructor(private form: FormBuilder) {
+    this.formCategory = this.form.group({
+      
+    })
+  }
+  
 
 }

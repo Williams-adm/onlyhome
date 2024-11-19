@@ -1,1 +1,20 @@
-<button class="bg-orange-300 px-3 py-1 ml-1 rounded-lg">Crear</button>
+<button class="bg-orange-300 px-3 py-1 ml-1 rounded-lg" (click)="showdialog()">Crear</button>
+
+<p-dialog [modal]="true" [(visible)]="visible" draggable="false" [maskStyle]="maskStyle" resizable="false">
+
+    <ng-template pTemplate="header">
+        <h2>Crear categoría</h2>
+    </ng-template>
+    <ng-template pTemplate="content bg-slate-200">
+        <div class="bg-slate-200">
+            <form [formGroup]="formCategory" class="mx-5 ">
+                <label class="block my-3">Nombre:
+                    <input type="text">
+                </label>
+                <label class="block">Descripción:
+                </label>
+                <textarea class="">ra</textarea>
+            </form>
+        </div>
+    </ng-template>
+</p-dialog>

@@ -20,7 +20,7 @@
                 <input type="checkbox" [id]="'status-' + i" class="hidden" [checked]="category.status === 1"
                     (click)="confirmationOnToggleChange(category.id, category.status)">
                 <label [for]="'status-' + i"
-                    class="w-16 h-6 rounded inline-flex cursor-pointer items-center justify-center" 
+                    class="w-16 h-6 rounded inline-flex cursor-pointer items-center justify-center"
                     [ngClass]="{'bg-buttonGO': category.status === 1, 'bg-stone-300': category.status === 0}">
                     <span>{{ category.status === 1 ? 'Activo' : 'Inactivo' }}</span>
                 </label>
@@ -34,8 +34,8 @@
 </div>
 
 <p-toast />
-<p-confirmDialog #cd>
-    <ng-template pTemplate="headless" let-message >
+<p-confirmDialog #cd maskStyleClass="position: absolute">
+    <ng-template pTemplate="headless" let-message>
         <section class="bg-gray-500">
             <span>{{ message.header }}</span>
             <p>{{ message.message }}</p>

@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* @import "primeng/resources/themes/saga-orange/theme.css";
-@import "primeng/resources/primeng.css";
-@import "primeicons/primeicons.css";
- */
+@layer primeng {
+  .p-dialog .p-dialog-header {
+    background-color: rgb(226 232 240);
+  }
+}

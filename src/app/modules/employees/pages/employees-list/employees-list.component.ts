@@ -12,6 +12,10 @@ import { Data, showEmployee } from '../../../../shared/models/employeeShow';
 })
   
 export class EmployeesListComponent implements OnInit {
+  maskStyle = {
+    'position': 'absolute',
+  }
+  
   employeesList: Datum[] = [];
   env = environment;
   currentPage: number = 1;

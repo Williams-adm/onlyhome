@@ -8,6 +8,8 @@ import { PaginatorModule } from 'primeng/paginator';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { CreateCategoryComponent } from './pages/create-category/create-category.component';
+import { DialogModule } from 'primeng/dialog';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -23,6 +25,9 @@ import { CreateCategoryComponent } from './pages/create-category/create-category
     PaginatorModule,
     ConfirmDialogModule,
     ToastModule,
+    DialogModule,
+    FormsModule, 
+    ReactiveFormsModule,
   ]
 })
 export class CategoriesModule { }

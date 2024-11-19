@@ -21,6 +21,8 @@ export class CategoryService {
     );
   }
 
+  public storeCategories(){}
+
   public patchCategories(id: Number, categoryData: Partial<storeCategory>): Observable<{ message: string }>{
     return this.http.patch<{ message: string }>(
       `${environment.backendBaseUrl}/api/v1/categories/${id}`, categoryData
