@@ -55,8 +55,9 @@
 </div>
 
 <p-dialog [header]="selectedEmployee ? (selectedEmployee.name + ' ' + selectedEmployee.last_name) : 'Empleado'"
-    [modal]="true" [(visible)]="visible" draggable="false" [maskStyle]="maskStyle" resizable="false">
-    <div *ngIf="selectedEmployee" class="bg-slate-200">
+    [modal]="true" [(visible)]="visible" draggable="false" [maskStyle]="maskStyle" resizable="false" 
+        [style]="{'background-color': 'rgb(226 232 240)'}">
+    <div *ngIf="selectedEmployee">
         <section>
             <img *ngIf="selectedEmployee?.photo_path?.startsWith('Employee'); else defaultProfile"
                 [src]="env.backendBaseUrl + '/storage/' + selectedEmployee.photo_path" alt="foto-empleado">

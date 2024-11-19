@@ -11,7 +11,6 @@ import { CreateCategoryComponent } from './pages/create-category/create-category
 import { DialogModule } from 'primeng/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
 @NgModule({
   declarations: [
     CategoriesListComponent,

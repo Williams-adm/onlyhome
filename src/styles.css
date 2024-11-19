@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer primeng {
+/* @layer primeng {
   .p-dialog .p-dialog-header {
     background-color: rgb(226 232 240);
   }
-}
+} */

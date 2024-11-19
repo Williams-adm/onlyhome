@@ -1,20 +1,16 @@
 <button class="bg-orange-300 px-3 py-1 ml-1 rounded-lg" (click)="showdialog()">Crear</button>
 
-<p-dialog [modal]="true" [(visible)]="visible" draggable="false" [maskStyle]="maskStyle" resizable="false">
+<p-dialog header="Crear categoría" [modal]="true" [(visible)]="visible" draggable="false" [maskStyle]="maskStyle" resizable="false"
+    [style]="{'background-color': 'rgb(226 232 240)', 'width': '22rem', padding: '1rem'}">
+    <form [formGroup]="formCategory" class="mx-5 my-4">
+        <label>Nombre: 
+            <input type="text" class="block w-full mb-4" name="name">
+        </label>
+        <label>Descipción:
+            <textarea name="" class="block w-full mb-4 resize-none rounded-md" rows="8">
 
-    <ng-template pTemplate="header">
-        <h2>Crear categoría</h2>
-    </ng-template>
-    <ng-template pTemplate="content bg-slate-200">
-        <div class="bg-slate-200">
-            <form [formGroup]="formCategory" class="mx-5 ">
-                <label class="block my-3">Nombre:
-                    <input type="text">
-                </label>
-                <label class="block">Descripción:
-                </label>
-                <textarea class="">ra</textarea>
-            </form>
-        </div>
-    </ng-template>
+            </textarea>
+        </label>
+        <button type="submit" class="bg-orange-200 p-1 rounded-lg" name="description">Crear</button>
+    </form>
 </p-dialog>
