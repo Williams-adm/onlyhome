@@ -15,7 +15,7 @@
         <tr *ngFor="let category of categoriesList; let i = index">
             <td>{{ (currentPage - 1) * pageSize + (i + 1) }}</td>
             <td>{{ category.name }}</td>
-            <td>{{ category.description }}</td>
+            <td>{{ category.description ? category.description : 'No cuenta con una descripción'}}</td>
             <td>
                 <input type="checkbox" [id]="'status-' + i" class="hidden" [checked]="category.status === 1"
                     (click)="confirmationOnToggleChange(category.id, category.status)">

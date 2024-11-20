@@ -2,14 +2,12 @@
 
 <p-dialog header="Crear categoría" [modal]="true" [(visible)]="visible" draggable="false" [maskStyle]="maskStyle" resizable="false"
     [style]="{'background-color': 'rgb(226 232 240)', 'width': '22rem', padding: '1rem'}">
-    <form [formGroup]="formCategory" class="mx-5 my-4">
+    <form [formGroup]="formCategory" class="mx-5 my-4" (ngSubmit)="onSubmit()">
         <label>Nombre: 
-            <input type="text" class="block w-full mb-4" name="name">
+            <input name="name" type="text" formControlName="name" class="block w-full mb-4">
         </label>
         <label>Descipción:
-            <textarea name="" class="block w-full mb-4 resize-none rounded-md" rows="8">
-
-            </textarea>
+            <textarea name="description" formControlName="description" rows="8" wrap="soft" class="block w-full mb-4 resize-none rounded-md"></textarea>
         </label>
         <button type="submit" class="bg-orange-200 p-1 rounded-lg" name="description">Crear</button>
     </form>
