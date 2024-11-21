@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from '../../../../shared/services/category/category.service';
 
@@ -13,7 +13,7 @@ export class CreateCategoryComponent {
   }
   visible: boolean = false;
   formCategory: FormGroup;
-  
+  @Output() categoryCreated = new EventEmitter<any>;
   showdialog() {
     this.visible = true
   }
@@ -30,6 +30,7 @@ export class CreateCategoryComponent {
       this.categoryService.storeCategories(this.formCategory.value).subscribe(
         (response) => {
           console.log(response)
+          this.categoryCreated.emit(response.data)
           this.formCategory.reset()
         },
         (error) => {

@@ -16,7 +16,10 @@ export class CategoriesListComponent implements OnInit{
   pageSize: number = 15; /* cantidad mostrada por pagina */
   totalRecords: number = 0; /* total de datos que existe */
 
-  constructor(private categoryService: CategoryService, private confirmationService: ConfirmationService, private messageService: MessageService) { }
+  constructor(private categoryService: CategoryService,
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
+  ) { }
   
   ngOnInit(): void {
     this.loadCategory({ first: 0, rows: 15 })
@@ -72,4 +75,12 @@ export class CategoriesListComponent implements OnInit{
         }
       )
   }
+
+  onCategoryCreated(newCategory: Datum) {
+    if (this.categoriesList.length < this.pageSize) {
+      this.categoriesList = [newCategory, ...this.categoriesList]; // Agregar a la lista actual
+    }
+    this.totalRecords += 1; // Actualizar el total del paginador
+  }
+
 }
