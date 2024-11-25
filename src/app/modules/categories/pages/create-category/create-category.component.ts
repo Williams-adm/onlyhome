@@ -1,24 +1,18 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from '../../../../shared/services/category/category.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-create-category',
   templateUrl: './create-category.component.html',
-  styleUrl: './create-category.component.css'
+  styleUrl: './create-category.component.css',
+  providers: [MessageService]
 })
 export class CreateCategoryComponent {
-  maskStyle = {
-    'position': 'absolute',
-  }
-  visible: boolean = false;
   formCategory: FormGroup;
-  @Output() categoryCreated = new EventEmitter<any>;
-  showdialog() {
-    this.visible = true
-  }
 
-  constructor(private form: FormBuilder, private categoryService: CategoryService) {
+  constructor(private form: FormBuilder, private categoryService: CategoryService, private messageService: MessageService) {
     this.formCategory = this.form.group({
       name: ['', Validators.required],
       description: ['']
@@ -29,8 +23,7 @@ export class CreateCategoryComponent {
     if (this.formCategory.valid) {
       this.categoryService.storeCategories(this.formCategory.value).subscribe(
         (response) => {
-          console.log(response)
-          this.categoryCreated.emit(response.data)
+          this.messageService.add({ severity: 'success', summary: 'Confirmado', detail: `La categoria ${this.formCategory.value.name} ha sido creada`, life:2000 })
           this.formCategory.reset()
         },
         (error) => {
@@ -38,7 +31,8 @@ export class CreateCategoryComponent {
         }
       );
     } else {
-      console.log('Formulario no válido')
+      /* console.log('Formulario no válido') */
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Formulario no válido', life:2000 })
     }
   }
 }

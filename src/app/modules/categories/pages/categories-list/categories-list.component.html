@@ -1,13 +1,12 @@
 <h1 class="text-center text-mainTitle">CATEGORIAS</h1>
-
-<app-create-category (categoryCreated)="onCategoryCreated($event)"></app-create-category>
-
+<button routerLink="create" class="bg-orange-300 px-3 py-1 ml-1 rounded-lg">Crear</button>
 <table>
     <thead>
         <tr>
             <th>#</th>
             <th>Nombre</th>
             <th>Descipción</th>
+            <th>Opciones</th>
             <th>Estado</th>
         </tr>
     </thead>
@@ -16,6 +15,7 @@
             <td>{{ (currentPage - 1) * pageSize + (i + 1) }}</td>
             <td>{{ category.name }}</td>
             <td>{{ category.description ? category.description : 'No cuenta con una descripción'}}</td>
+            <td><button class="fa-regular fa-pen-to-square fa-xl"></button></td>
             <td>
                 <input type="checkbox" [id]="'status-' + i" class="hidden" [checked]="category.status === 1"
                     (click)="confirmationOnToggleChange(category.id, category.status)">

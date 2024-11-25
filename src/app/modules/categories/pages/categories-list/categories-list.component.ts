@@ -14,7 +14,7 @@ export class CategoriesListComponent implements OnInit{
   categoriesList: Datum[] = []; /* almacenamos la data */
   currentPage: number = 1; /* pagina actual */
   pageSize: number = 15; /* cantidad mostrada por pagina */
-  totalRecords: number = 0; /* total de datos que existe */
+  totalRecords: number = 0; /* total de datos que existe */ 
 
   constructor(private categoryService: CategoryService,
     private confirmationService: ConfirmationService,
@@ -75,12 +75,4 @@ export class CategoriesListComponent implements OnInit{
         }
       )
   }
-
-  onCategoryCreated(newCategory: Datum) {
-    if (this.categoriesList.length < this.pageSize) {
-      this.categoriesList = [newCategory, ...this.categoriesList]; // Agregar a la lista actual
-    }
-    this.totalRecords += 1; // Actualizar el total del paginador
-  }
-
 }

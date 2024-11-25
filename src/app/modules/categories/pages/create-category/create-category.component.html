@@ -1,14 +1,12 @@
-<button class="bg-orange-300 px-3 py-1 ml-1 rounded-lg" (click)="showdialog()">Crear</button>
-
-<p-dialog header="Crear categoría" [modal]="true" [(visible)]="visible" draggable="false" [maskStyle]="maskStyle" resizable="false"
-    [style]="{'background-color': 'rgb(226 232 240)', 'width': '22rem', padding: '1rem'}">
-    <form [formGroup]="formCategory" class="mx-5 my-4" (ngSubmit)="onSubmit()">
-        <label>Nombre: 
-            <input name="name" type="text" formControlName="name" class="block w-full mb-4">
-        </label>
-        <label>Descipción:
-            <textarea name="description" formControlName="description" rows="8" wrap="soft" class="block w-full mb-4 resize-none rounded-md"></textarea>
-        </label>
-        <button type="submit" class="bg-orange-200 p-1 rounded-lg" name="description">Crear</button>
-    </form>
-</p-dialog>
+<h1 class="text-center text-mainTitle">CREAR CATEGORÍA</h1>
+<button routerLink="/categories" class="bg-orange-300 px-3 py-1 ml-1 rounded-lg">Regresar</button>
+<form [formGroup]="formCategory" class="mx-5 my-4 flex flex-col justify-center items-center" (ngSubmit)="onSubmit()">
+    <label>Nombre: 
+        <input name="name" type="text" formControlName="name" class="block mb-4">
+    </label>
+    <label>Descripción:
+        <textarea name="description" formControlName="description" rows="8" wrap="soft" class="block  mb-4 resize-none rounded-md"></textarea>
+    </label>
+    <p-toast />
+    <button type="submit" class="bg-orange-200 p-1 rounded-lg" name="description">Crear</button>
+</form>

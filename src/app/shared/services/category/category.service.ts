@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { indexCategories } from '../../models/category/categoryIndex';
 import { environment } from '../../../../environments/environment.development';
 import { storeCategory } from '../../models/category/categoryStore';
-import { categoryShow } from '../../models/category/categoryShow';
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +21,8 @@ export class CategoryService {
     );
   }
 
-  public storeCategories(category: storeCategory): Observable<categoryShow>{
-    return this.http.post<categoryShow>(
+  public storeCategories(category: storeCategory): Observable<{ message: string }>{
+    return this.http.post<{ message: string }>(
       `${environment.backendBaseUrl}/api/v1/categories`, category
     )
   }
