@@ -9,11 +9,13 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { CreateCategoryComponent } from './pages/create-category/create-category.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditCategoryComponent } from './pages/edit-category/edit-category.component';
 
 @NgModule({
   declarations: [
     CategoriesListComponent,
-    CreateCategoryComponent
+    CreateCategoryComponent,
+    EditCategoryComponent
   ],
   imports: [
     CommonModule,
