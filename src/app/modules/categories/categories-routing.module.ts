@@ -11,7 +11,7 @@ const routes: Routes = [
     children: [
       { path: '', component: CategoriesListComponent },
       { path: 'create', component: CreateCategoryComponent },
-      { path: 'edit', component: EditCategoryComponent }
+      { path: 'edit/:id', component: EditCategoryComponent }
     ]
   },
 ];

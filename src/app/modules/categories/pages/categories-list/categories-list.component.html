@@ -15,7 +15,7 @@
             <td>{{ (currentPage - 1) * pageSize + (i + 1) }}</td>
             <td>{{ category.name }}</td>
             <td>{{ category.description ? category.description : 'No cuenta con una descripción'}}</td>
-            <td><button class="fa-regular fa-pen-to-square fa-xl" routerLink="edit"></button></td>
+            <td><button class="fa-regular fa-pen-to-square fa-xl" [routerLink]="['edit', category.id]"></button></td>
             <td>
                 <input type="checkbox" [id]="'status-' + i" class="hidden" [checked]="category.status === 1"
                     (click)="confirmationOnToggleChange(category.id, category.status)">

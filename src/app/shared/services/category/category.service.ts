@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { indexCategories } from '../../models/category/categoryIndex';
 import { environment } from '../../../../environments/environment.development';
 import { storeCategory } from '../../models/category/categoryStore';
+import { showCategory } from '../../models/category/categoryShow';
 
 @Injectable({
   providedIn: 'root'
@@ -21,19 +22,27 @@ export class CategoryService {
     );
   }
 
+  public showCategory(id: Number): Observable<showCategory>{
+    return this.http.get<showCategory>(
+      `${environment.backendBaseUrl}/api/v1/categories/${id}`
+    )
+  }
+
   public storeCategories(category: storeCategory): Observable<{ message: string }>{
     return this.http.post<{ message: string }>(
       `${environment.backendBaseUrl}/api/v1/categories`, category
     )
   }
 
-  public updateCategories() {
-    
+  public updateCategories(id: Number, category: storeCategory): Observable<{ message: string }> {
+    return this.http.put<{ message: string }>(
+      `${environment.backendBaseUrl}/api/v1/categories/${id}`, category
+    )
   }
 
-  public patchCategories(id: Number, categoryData: Partial<storeCategory>): Observable<{ message: string }>{
+  public patchCategories(id: Number, category: Partial<storeCategory>): Observable<{ message: string }>{
     return this.http.patch<{ message: string }>(
-      `${environment.backendBaseUrl}/api/v1/categories/${id}`, categoryData
+      `${environment.backendBaseUrl}/api/v1/categories/${id}`, category
     )
   }
 }

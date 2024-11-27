@@ -1,1 +1,13 @@
-<p>edit-category works!</p>
+<h1 class="text-center text-mainTitle">Editar Categoría</h1>
+<button routerLink="/categories" class="bg-orange-300 px-3 py-1 ml-1 rounded-lg">Regresar</button>
+<form *ngIf="category" [formGroup]="formCategory" class="mx-5 my-4 flex flex-col justify-center items-center" (ngSubmit)="onSubmit()">
+    <label>Nombre:
+        <input name="name" type="text" formControlName="name" class="block mb-4" [(ngModel)]="category.name">
+    </label>
+    <label>Descripción:
+        <textarea name="description" formControlName="description" rows="8" wrap="soft"
+            class="block  mb-4 resize-none rounded-md" [(ngModel)]="category.description"></textarea>
+    </label>
+    <p-toast />
+    <button type="submit" class="bg-orange-200 p-1 rounded-lg" name="description">Actualizar</button>
+</form>
