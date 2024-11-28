@@ -15,7 +15,8 @@ export class EditCategoryComponent implements OnInit{
   category: Data | null = null;
   categoryId: number = 0;
   formCategory: FormGroup;
-
+  originalCategory: Data | null = null;
+  
   constructor(private categoryService: CategoryService, private route: ActivatedRoute, private form: FormBuilder) { 
     this.formCategory = this.form.group({
       name: ['', Validators.required],
@@ -34,6 +35,13 @@ export class EditCategoryComponent implements OnInit{
     this.categoryService.showCategory(id).subscribe(
       (data: showCategory) => {
         this.category = data.data
+        this.originalCategory = { ...this.category}
+        if (this.category) {
+          this.formCategory.patchValue({
+            name: this.category.name,
+            description: this.category.description
+          })
+        }
       },
       (error) => {
         console.log("Error al obtener los detalles de la categoría", error);
