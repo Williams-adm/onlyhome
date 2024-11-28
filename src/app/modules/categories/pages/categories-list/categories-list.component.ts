@@ -61,7 +61,7 @@ export class CategoriesListComponent implements OnInit{
 
   updateCategoryStatus(categoryId: number, currentStatus: number): void{
     const newStatus = currentStatus === 1 ? 0 : 1;
-    this.categoryService.patchCategories(categoryId, { status: newStatus })
+    this.categoryService.patchCategoriesStatus(categoryId, { status: newStatus })
       .subscribe(
         response => {
           const category = this.categoriesList.find(emp => emp.id === categoryId);

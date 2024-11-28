@@ -5,6 +5,7 @@ import { indexCategories } from '../../models/category/categoryIndex';
 import { environment } from '../../../../environments/environment.development';
 import { storeCategory } from '../../models/category/categoryStore';
 import { showCategory } from '../../models/category/categoryShow';
+import { updateCategoryStatus } from '../../models/category/categoryUpdate';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,12 @@ export class CategoryService {
   }
 
   public patchCategories(id: Number, category: Partial<storeCategory>): Observable<{ message: string }>{
+    return this.http.patch<{ message: string }>(
+      `${environment.backendBaseUrl}/api/v1/categories/${id}`, category
+    )
+  }
+  
+  public patchCategoriesStatus(id: Number, category: Partial<updateCategoryStatus>): Observable<{ message: string }>{
     return this.http.patch<{ message: string }>(
       `${environment.backendBaseUrl}/api/v1/categories/${id}`, category
     )

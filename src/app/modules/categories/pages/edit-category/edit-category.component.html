@@ -9,5 +9,18 @@
             class="block  mb-4 resize-none rounded-md"></textarea>
     </label>
     <p-toast />
-    <button type="submit" class="bg-orange-200 p-1 rounded-lg" name="description">Actualizar</button>
+    <button type="button" class="bg-orange-200 p-1 rounded-lg" name="description" (click)="confirmationUpdate()">Actualizar</button>
 </form>
+
+<p-confirmDialog #cd maskStyleClass="position: absolute">
+    <ng-template pTemplate="headless" let-message>
+        <section class="bg-zinc-300">
+            <span>{{ message.header }}</span>
+            <p>{{ message.message }}</p>
+            <div>
+                <button (click)="cd.accept()">Aceptar</button>
+                <button (click)="cd.reject()">Cancelar</button>
+            </div>
+        </section>
+    </ng-template>
+</p-confirmDialog>

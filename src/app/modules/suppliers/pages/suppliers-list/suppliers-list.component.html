@@ -1,0 +1,32 @@
+<h1 class="text-center text-mainTitle">PROVEEDORES</h1>
+<table>
+    <thead>
+        <th>#</th>
+        <th>Nombre</th>
+        <th>Ruc</th>
+        <th>Dirección</th>
+        <th>Teléfono</th>
+        <th>Contacto</th>
+        <th>Opciones</th>
+        <th>Estado</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let supplier of suppliersList; let i = index">
+            <td>{{ (currentPage - 1) * pageSize + (i + 1) }}</td>
+            <td>{{ supplier.business_name }}</td>
+            <td>{{ supplier.num_ruc }}</td>
+            <td>{{ supplier.fiscal_address }}</td>
+            <td>{{ supplier.phone }}</td>
+            <td>{{ supplier.contac }}</td>
+            <td><button class="fa-regular fa-pen-to-square fa-xl"></button></td>
+            <td>
+                <input type="checkbox" [id]="'status-' + i" class="hidden" [checked]="supplier.status === 1"
+                    >
+                <label [for]="'status-' + i" class="w-16 h-6 rounded inline-flex cursor-pointer items-center justify-center"
+                    [ngClass]="{'bg-buttonGO': supplier.status === 1, 'bg-stone-300': supplier.status === 0}">
+                    <span>{{ supplier.status === 1 ? 'Activo' : 'Inactivo' }}</span>
+                </label>
+            </td>
+        </tr>
+    </tbody>
+</table>
