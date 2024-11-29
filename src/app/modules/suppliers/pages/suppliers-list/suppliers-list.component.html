@@ -1,4 +1,5 @@
 <h1 class="text-center text-mainTitle">PROVEEDORES</h1>
+<button routerLink="create" class="bg-orange-300 px-3 py-1 ml-1 rounded-lg">Crear</button>
 <table>
     <thead>
         <th>#</th>
@@ -21,7 +22,7 @@
             <td><button class="fa-regular fa-pen-to-square fa-xl"></button></td>
             <td>
                 <input type="checkbox" [id]="'status-' + i" class="hidden" [checked]="supplier.status === 1"
-                    >
+                    (click)="confirmationOnToggleChange(supplier.id, supplier.status)">
                 <label [for]="'status-' + i" class="w-16 h-6 rounded inline-flex cursor-pointer items-center justify-center"
                     [ngClass]="{'bg-buttonGO': supplier.status === 1, 'bg-stone-300': supplier.status === 0}">
                     <span>{{ supplier.status === 1 ? 'Activo' : 'Inactivo' }}</span>
@@ -30,3 +31,22 @@
         </tr>
     </tbody>
 </table>
+
+<div>
+    <p-paginator (onPageChange)="loadSupplier($event)" [rows]="15" [totalRecords]="totalRecords"
+        [rowsPerPageOptions]="[15, 30, 45]" />
+</div>
+
+<p-toast />
+<p-confirmDialog #cd maskStyleClass="position: absolute">
+    <ng-template pTemplate="headless" let-message>
+        <section class="bg-zinc-300">
+            <span>{{ message.header }}</span>
+            <p>{{ message.message }}</p>
+            <div>
+                <button (click)="cd.accept()">Aceptar</button>
+                <button (click)="cd.reject()">Cancelar</button>
+            </div>
+        </section>
+    </ng-template>
+</p-confirmDialog>

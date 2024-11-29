@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { indexSuppliers } from '../../models/supplier/supplierIndex';
 import { environment } from '../../../../environments/environment.development';
 import { Observable } from 'rxjs';
+import { updateSupplierStatus } from '../../models/supplier/supplierUpdate';
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,11 @@ export class SupplierService {
     return this.http.get<indexSuppliers>(
       `${environment.backendBaseUrl}/api/v1/suppliers`, { params }
     );
+  }
+
+  public patchSupplierStatus(id: number, supplier: Partial<updateSupplierStatus>): Observable<{ message: string }>{
+    return this.http.patch<{ message: string }>(
+      `${environment.backendBaseUrl}/api/v1/suppliers/${id}`, supplier
+    )
   }
 }
