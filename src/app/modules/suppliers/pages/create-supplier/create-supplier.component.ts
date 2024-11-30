@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SupplierService } from '../../../../shared/services/supplier/supplier.service';
 
 @Component({
@@ -12,7 +12,7 @@ export class CreateSupplierComponent {
 
   constructor(private form: FormBuilder, private supplierService: SupplierService) {
     this.formSupplier = this.form.group({
-      
+      name: ['', Validators.required],
     })
   }
 }

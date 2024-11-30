@@ -1,5 +1,7 @@
 <h1 class="text-center text-mainTitle">CREAR PROVEEDOR</h1>
 <button routerLink="/suppliers" class="bg-orange-300 px-3 py-1 ml-1 rounded-lg">Regresar</button>
-<form action="">
-    
+<form [formGroup]="formSupplier" class="mx-5 my-4 flex flex-col justify-center items-center">
+    <label>Nombre:
+        <input name="name" type="text" formControlName="name" class="block mb-4">
+    </label>
 </form>
