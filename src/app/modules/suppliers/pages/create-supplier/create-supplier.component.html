@@ -1,7 +1,21 @@
 <h1 class="text-center text-mainTitle">CREAR PROVEEDOR</h1>
 <button routerLink="/suppliers" class="bg-orange-300 px-3 py-1 ml-1 rounded-lg">Regresar</button>
 <form [formGroup]="formSupplier" class="mx-5 my-4 flex flex-col justify-center items-center">
-    <label>Nombre:
-        <input name="name" type="text" formControlName="name" class="block mb-4">
+    <label>N° De RUC:
+        <input name="numRuc" type="number" formControlName="num_ruc" (keyup.enter)="searchRuc()" class="block mb-4">
+        <button type="button" (click)="searchRuc()" class="bg-blue-300 px-3 py-1 ml-1 rounded-lg">Buscar</button>
     </label>
+    <label>Nombre:
+        <input name="businessName" type="text" formControlName="business_name" class="block mb-4">
+    </label>
+    <label>Dirección:
+        <input name="fiscalAddress" type="text" formControlName="fiscal_address" class="block mb-4">
+    </label>
+    <label>Teléfono:
+        <input name="phone" type="number" formControlName="phone" class="block mb-4">
+    </label>
+    <label>Contacto:
+        <input name="contac" type="text" formControlName="contac" class="block mb-4">
+    </label>
+    <button type="submit" class="bg-orange-200 p-1 rounded-lg">Crear</button>
 </form>
