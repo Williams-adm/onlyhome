@@ -3,9 +3,9 @@
 <table>
     <thead>
         <th>#</th>
-        <th>Nombre</th>
+        <th>Razon Social</th>
         <th>Ruc</th>
-        <th>Dirección</th>
+        <th>Dirección Fiscal</th>
         <th>Teléfono</th>
         <th>Contacto</th>
         <th>Opciones</th>
@@ -17,9 +17,9 @@
             <td>{{ supplier.business_name }}</td>
             <td>{{ supplier.num_ruc }}</td>
             <td>{{ supplier.fiscal_address }}</td>
-            <td>{{ supplier.phone }}</td>
+            <td *ngFor="let phone of supplier?.phones">{{ '+' +     phone.prefix + ' ' + phone.number }}</td>
             <td>{{ supplier.contac }}</td>
-            <td><button class="fa-regular fa-pen-to-square fa-xl"></button></td>
+            <td><button class="fa-regular fa-pen-to-square fa-xl" [routerLink]="['edit', supplier.id]"></button></td>
             <td>
                 <input type="checkbox" [id]="'status-' + i" class="hidden" [checked]="supplier.status === 1"
                     (click)="confirmationOnToggleChange(supplier.id, supplier.status)">

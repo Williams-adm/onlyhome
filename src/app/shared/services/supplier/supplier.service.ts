@@ -5,6 +5,7 @@ import { environment } from '../../../../environments/environment.development';
 import { Observable } from 'rxjs';
 import { updateSupplierStatus } from '../../models/supplier/supplierUpdate';
 import { storeSupplier } from '../../models/supplier/supplierStore';
+import { showSupplier } from '../../models/supplier/supplierShow';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,12 @@ export class SupplierService {
     );
   }
 
+  public showSupplier(id: Number): Observable<showSupplier>{
+    return this.http.get<showSupplier>(
+      `${environment.backendBaseUrl}/api/v1/suppliers/${id}`
+    )
+  }
+  
   public storeSupplier(supplier: storeSupplier): Observable<{ message: string }>{
     return this.http.post<{ message: string }>(
       `${environment.backendBaseUrl}/api/v1/suppliers`, supplier

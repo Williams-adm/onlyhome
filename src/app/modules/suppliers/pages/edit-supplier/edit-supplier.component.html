@@ -1,5 +1,6 @@
-<h1 class="text-center text-mainTitle">CREAR PROVEEDOR</h1>
+<h1 class="text-center text-mainTitle">Editar Proveedor</h1>
 <button routerLink="/suppliers" class="bg-orange-300 px-3 py-1 ml-1 rounded-lg">Regresar</button>
+
 <form [formGroup]="formSupplier" class="mx-5 my-4 flex flex-col justify-center items-center" (ngSubmit)="onSubmit()">
     <label>N° De RUC:
         <input name="numRuc" type="number" formControlName="num_ruc" (keyup.enter)="searchRuc()" class="block mb-4">
@@ -12,7 +13,8 @@
         <input name="fiscalAddress" type="text" formControlName="fiscal_address" class="block mb-4">
     </label>
     <label>Prefijo:
-        <p-dropdown name="prefix" formControlName="prefix" [options]="prefixs" optionLabel="label" placeholder="Seleccione" class="block mb-4"/>
+        <p-dropdown name="prefix" formControlName="prefix" [options]="prefixs" optionLabel="label"
+            placeholder="Seleccione" class="block mb-4" />
     </label>
     <label>Teléfono:
         <input name="phone" type="number" formControlName="phone" class="block mb-4">

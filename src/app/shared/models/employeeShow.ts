@@ -1,7 +1,7 @@
-import { Address } from "./adress";
 import { DocumentType } from "./documentType";
 import { EmployeeDocument } from "./employeeDocument";
-import { Phone } from "./phone";
+import { Address } from "./polymorphic/adress";
+import { Phone } from "./polymorphic/phone";
 import { User } from "./user";
 
 export interface showEmployee {

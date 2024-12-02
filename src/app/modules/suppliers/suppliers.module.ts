@@ -9,13 +9,16 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ToastModule } from 'primeng/toast';
 import { CreateSupplierComponent } from './pages/create-supplier/create-supplier.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditSupplierComponent } from './pages/edit-supplier/edit-supplier.component';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 
 @NgModule({
   declarations: [
     SuppliersListComponent,
-    CreateSupplierComponent
+    CreateSupplierComponent,
+    EditSupplierComponent
   ],
   imports: [
     CommonModule,
@@ -27,6 +30,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ToastModule,
     FormsModule, 
     ReactiveFormsModule,
+    DropdownModule,
   ]
 })
 export class SuppliersModule { }

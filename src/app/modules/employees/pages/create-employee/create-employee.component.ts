@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { PaymentDate, storeEmployee } from '../../../../shared/models/employeeStore';
 import { docType } from '../../../../shared/models/documentType';
-import { prefix } from '../../../../shared/models/phone';
-import { city, country, province, region } from '../../../../shared/models/adress';
 import { employDoc } from '../../../../shared/models/employeeDocument';
+import { PaymentDate, storeEmployee } from '../../../../shared/models/employeeStore';
+import { city, country, province, region } from '../../../../shared/models/polymorphic/adress';
+import { prefix } from '../../../../shared/models/polymorphic/phone';
 import { EmployeeService } from '../../../../shared/services/employee.service';
 
 /* funcion para transformar y acceder a los enum, usados en los modelos ->para los dropdown */

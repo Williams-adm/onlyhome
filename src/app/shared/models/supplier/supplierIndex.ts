@@ -1,3 +1,5 @@
+import { Phone } from "../polymorphic/phone";
+
 export interface indexSuppliers {
     data:  Datum[];
     links: Links;
@@ -9,7 +11,7 @@ export interface Datum {
     business_name: string;
     num_ruc: number;
     fiscal_address: string;
-    phone:         string;
+    phones:         Phone[];
     contac:        string;
     status:        number;
 }
