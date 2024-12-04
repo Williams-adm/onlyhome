@@ -1,7 +1,7 @@
 <h1 class="text-center text-mainTitle">Editar Proveedor</h1>
 <button routerLink="/suppliers" class="bg-orange-300 px-3 py-1 ml-1 rounded-lg">Regresar</button>
 
-<form [formGroup]="formSupplier" class="mx-5 my-4 flex flex-col justify-center items-center" (ngSubmit)="onSubmit()">
+<form *ngIf="supplier" [formGroup]="formSupplier" class="mx-5 my-4 flex flex-col justify-center items-center" (ngSubmit)="onSubmit()">
     <label>N° De RUC:
         <input name="numRuc" type="number" formControlName="num_ruc" (keyup.enter)="searchRuc()" class="block mb-4">
         <button type="button" (click)="searchRuc()" class="bg-blue-300 px-3 py-1 ml-1 rounded-lg">Buscar</button>
@@ -23,5 +23,18 @@
         <input name="contac" type="text" formControlName="contac" class="block mb-4">
     </label>
     <p-toast />
-    <button type="submit" class="bg-orange-200 p-1 rounded-lg">Crear</button>
+    <button type="button" class="bg-orange-200 p-1 rounded-lg" name="description" (click)="confirmationUpdate()">Actualizar</button>
 </form>
+
+<p-confirmDialog #cd maskStyleClass="position: absolute">
+    <ng-template pTemplate="headless" let-message>
+        <section class="bg-zinc-300">
+            <span>{{ message.header }}</span>
+            <p>{{ message.message }}</p>
+            <div>
+                <button (click)="cd.accept()">Aceptar</button>
+                <button (click)="cd.reject()">Cancelar</button>
+            </div>
+        </section>
+    </ng-template>
+</p-confirmDialog>
