@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { indexSuppliers } from '../../models/supplier/supplierIndex';
 import { environment } from '../../../../environments/environment.development';
 import { Observable } from 'rxjs';
-import { updateSupplierStatus } from '../../models/supplier/supplierUpdate';
+import { updateSupplier, updateSupplierStatus } from '../../models/supplier/supplierUpdate';
 import { storeSupplier } from '../../models/supplier/supplierStore';
 import { showSupplier } from '../../models/supplier/supplierShow';
 
@@ -32,6 +32,18 @@ export class SupplierService {
   public storeSupplier(supplier: storeSupplier): Observable<{ message: string }>{
     return this.http.post<{ message: string }>(
       `${environment.backendBaseUrl}/api/v1/suppliers`, supplier
+    )
+  }
+
+  public updateSupplier(id: Number, supplier: updateSupplier): Observable<{ message: string }> {
+    return this.http.put<{ message: string }>(
+      `${environment.backendBaseUrl}/api/v1/suppliers/${id}`, supplier
+    )
+  }
+
+  public patchSupplier(id: Number, category: Partial<updateSupplier>): Observable<{ message: string }>{
+    return this.http.patch<{ message: string }>(
+      `${environment.backendBaseUrl}/api/v1/categories/${id}`, category
     )
   }
 

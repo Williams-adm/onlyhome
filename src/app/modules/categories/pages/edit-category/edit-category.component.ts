@@ -12,6 +12,7 @@ import { updateCategory } from '../../../../shared/models/category/categoryUpdat
   styleUrl: './edit-category.component.css',
   providers: [ConfirmationService, MessageService]
 })
+  
 export class EditCategoryComponent implements OnInit {
   category: Data | null = null;
   categoryId: number = 0;

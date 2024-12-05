@@ -11,8 +11,7 @@ import { CreateSupplierComponent } from './pages/create-supplier/create-supplier
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditSupplierComponent } from './pages/edit-supplier/edit-supplier.component';
 import { DropdownModule } from 'primeng/dropdown';
-
-
+import isEqual from 'lodash/isEqual';
 
 @NgModule({
   declarations: [

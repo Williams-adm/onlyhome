@@ -55,20 +55,25 @@ export class EditSupplierComponent {
     this.supplierService.showSupplier(id).subscribe(
       (data: showSupplier) => {
         this.supplier = data.data
-        /* this.originalSupplier = { ...this.supplier} */
         if (this.supplier) {
           this.formSupplier.patchValue({
             num_ruc: this.supplier.num_ruc,
             business_name: this.supplier.business_name,
             fiscal_address: this.supplier.fiscal_address,
-            prefix: this.supplier.phones?.[0]?.prefix
-  ? this.prefixs.find(option => option.value === this.supplier?.phones[0].prefix) 
-  : null,
-
+            prefix: this.supplier.phones?.[0]?.prefix? this.prefixs.find(option => option.value == this.supplier?.phones[0].prefix) : null,
             phone: this.supplier.phones?.[0]?.number ?? '',
             contac: this.supplier.contac,
           })
-          this.originalSupplier = this.formSupplier.getRawValue();
+          const { prefix, ...rawValue } = this.formSupplier.value;
+          const prefixValue = this.formSupplier.get('prefix')?.value?.value;
+          const originalSupplier: updateSupplier = {
+            num_ruc: rawValue.num_ruc,
+            business_name:  rawValue.business_name,
+            fiscal_address: rawValue.fiscal_address,
+            phone: prefixValue ? [{ prefix: prefixValue, number: rawValue.phone }] : [],
+            contac: rawValue.contac
+          }
+        console.log(originalSupplier)
         }
       },
       (error) => {
@@ -76,11 +81,6 @@ export class EditSupplierComponent {
       }
     )
   }
-
-
-
-
-
 
   searchRuc() {
     const ruc = this.formSupplier.get('num_ruc')?.value;
@@ -115,31 +115,36 @@ export class EditSupplierComponent {
       return;
     }
   }
+
+  confirmationUpdate() {
+    this.confirmationService.confirm({
+      header: `¿Esta seguro que deseas editarlo?`,
+      message: 'Por favor, confirme',
+      accept: () => {
+        this.onSubmit()
+      },
+      reject: () => {
+        this.messageService.add({ severity: 'error', summary: 'Cancelado', detail: 'No se hizo ningun cambio', life:2000 })
+      }
+    })
+  }
   
   onSubmit() {
-/*     if (this.formSupplier.valid) {
-      const { prefix, ...rawValue } = this.formSupplier.value;
-      const prefixValue = this.formSupplier.get('prefix')?.value?.value;
-    
-      const result: storeSupplier = {
-        num_ruc: rawValue.num_ruc,
-        business_name:  rawValue.business_name,
-        fiscal_address: rawValue.fiscal_address,
-        phone: prefixValue ? [{ prefix: prefixValue, number: rawValue.phone }] : [],
-        contac: rawValue.contac
-      }
-      
-      this.supplierService.storeSupplier(result).subscribe(
-        (response) => {
-          this.messageService.add({ severity: 'success', summary: 'Confirmado', detail: `El proveedor ${this.formSupplier.value.business_name} ha sido creada`, life: 2000 })
-          this.formSupplier.reset()
-        },
-        (error) => {
-          console.error('Error al crear el cliente: ', error);
-        }
-      );
-    } else {
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Formulario no válido', life:2000 })
-    } */
+    const { prefix, ...rawValue } = this.formSupplier.value;
+    const prefixValue = this.formSupplier.get('prefix')?.value?.value;
+    const currentValues: updateSupplier = {
+      num_ruc: rawValue.num_ruc,        business_name:  rawValue.business_name,
+      fiscal_address: rawValue.fiscal_address,
+      phone: prefixValue ? [{ prefix: prefixValue, number: rawValue.phone }] : [],
+      contac: rawValue.contac
+    }
+    console.log(currentValues)
+  
+    if (JSON.stringify(this.originalSupplier) === JSON.stringify(currentValues)) {
+      this.messageService.add({ severity: 'info', summary: 'Sin Cambios', detail: 'No se generaron cambios en la categoria', life:2000 })
+      return
+    }
+
+
   }
 }
