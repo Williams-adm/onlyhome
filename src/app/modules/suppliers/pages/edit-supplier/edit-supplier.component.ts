@@ -7,6 +7,7 @@ import { SupplierService } from '../../../../shared/services/supplier/supplier.s
 import { RucService } from '../../../../shared/services/apiExterno/ruc/ruc.service';
 import { prefix } from '../../../../shared/models/polymorphic/phone';
 import { ActivatedRoute } from '@angular/router';
+import isEqual from 'lodash/isEqual';
 
 /* funcion para transformar y acceder a los enum, usados en los modelos ->para los dropdown */
 function enumToOptions<T extends Record<string, unknown>>(enumObj: T): { label: string; value: T[keyof T] }[] {
@@ -28,7 +29,7 @@ export class EditSupplierComponent {
   supplierId: number = 0;
   formSupplier: FormGroup;
   prefixs: { label: string; value: prefix }[];
-  originalSupplier: Partial<updateSupplier> = {}
+  originalSupplier: Partial<any> = {}
 
   constructor(private form: FormBuilder, private supplierService: SupplierService, private rucService: RucService,
     private messageService: MessageService, private confirmationService: ConfirmationService, private route: ActivatedRoute
@@ -55,6 +56,7 @@ export class EditSupplierComponent {
     this.supplierService.showSupplier(id).subscribe(
       (data: showSupplier) => {
         this.supplier = data.data
+        this.originalSupplier = { ...this.supplier}
         if (this.supplier) {
           this.formSupplier.patchValue({
             num_ruc: this.supplier.num_ruc,
@@ -140,11 +142,19 @@ export class EditSupplierComponent {
     }
     console.log(currentValues)
   
-    if (JSON.stringify(this.originalSupplier) === JSON.stringify(currentValues)) {
-      this.messageService.add({ severity: 'info', summary: 'Sin Cambios', detail: 'No se generaron cambios en la categoria', life:2000 })
-      return
+    if (isEqual(this.originalSupplier, currentValues)) {
+  this.messageService.add({
+    severity: 'info',
+    summary: 'Sin Cambios',
+    detail: 'No se generaron cambios en el proveedor',
+    life: 2000,
+  });
+  return;
     }
-
+    console.log(this.originalSupplier)
+    console.log(currentValues)
+console.log(JSON.stringify(this.originalSupplier) === JSON.stringify(currentValues)); // false
+console.log(isEqual(this.originalSupplier, currentValues)); // true
 
   }
 }
